@@ -95,13 +95,13 @@ GENERAL/REUSABLE COMPONENTS
 
 .btn--full-green:link, 
 .btn--full-green:visited {
-    background-color: #96c38c; 
+    background-color: #fa9746;
     color: #fff;
     
 }
 .btn--full-green:hover, 
 .btn--full-green:active {
-   background-color: #96c38c; 
+   background-color: #e1883f;
 }
 
 .margin-right-sm {
@@ -116,7 +116,7 @@ HEADER
     justify-content: space-between;
     align-items: center;
     padding: .8rem 4.2rem;
-    background-color: #feeada;
+    background-color: #fff6f0;
     
 }
 .logo {
@@ -175,7 +175,7 @@ NAVIGATION
 HERO SECTION
 *******************/
 .section-hero {
-    background-color: #feeada;
+    background-color: #fff6f0;
     padding: 6.4rem 0 9.6rem 0;
 }
 .hero {
@@ -227,7 +227,7 @@ HERO SECTION
 PLANS
 *******************/
 .plans-container {
-    background-color: #feeada;
+    background-color: #fff6f0;
 }
 .plans {
     display: grid;
@@ -239,7 +239,7 @@ PLANS
     justify-content: center;
 }
 .plan {
-    background-color: #fdd5b5;
+    background-color: #ffffff;
     max-width: 50rem;
     padding: 5rem;
     border-radius: 20px;
