@@ -8,7 +8,9 @@ profile -> past orders (order by date) / edit user info
 join newsletter
 
 
+
 users
+
 id
 username
 password
@@ -19,6 +21,7 @@ subscribed (newsletter boolean)
 
 
 orders
+
 id
 user_id
 plan_id
@@ -27,6 +30,7 @@ meals  (array of selected api meal id's)
 
 
 plans
+
 id
 plan_name
 price
