@@ -33,6 +33,18 @@ def homepage():
     return render_template('index.html')
 
 
+@app.route('/menu')
+def show_menu():
+    """Show menu preview."""
+    return render_template('menu.html')
+
+
+@app.route('/plans')
+def show_plans():
+    """Show plans page. Leads to ordering page."""
+
+    return render_template('plans.html')
+
 ##############################################################################
 # User signup/login/logout
 
