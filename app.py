@@ -1,12 +1,12 @@
+from models import connect_db
+from flask_debugtoolbar import DebugToolbarExtension
+from flask import Flask, render_template, flash, redirect
 import os
 
-from flask import Flask, render_template, flash, redirect
-from flask_debugtoolbar import DebugToolbarExtension
 
 # from forms import UserAddForm, LoginForm, MessageForm, EditForm
-from models import connect_db
 
-CURR_USER_KEY = "curr_user"
+# CURR_USER_KEY = "curr_user"
 
 app = Flask(__name__)
 
@@ -14,8 +14,8 @@ app = Flask(__name__)
 #     os.environ.get('DATABASE_URL', 'postgresql:///warbler'))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///prepkitchen'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_ECHO'] = False
-app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+app.config['SQLALCHEMY_ECHO'] = True
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = True
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', "it's a secret")
 toolbar = DebugToolbarExtension(app)
 
@@ -36,6 +36,9 @@ def homepage():
 @app.route('/menu')
 def show_menu():
     """Show menu preview."""
+
+    # selected_recipes =
+    requests.get('www.themealdb.com/api/json/v1/1/filter.php?c=Seafood')
     return render_template('menu.html')
 
 
