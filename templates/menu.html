@@ -258,11 +258,10 @@
 
   <div class="menu-hero">
     <h1>Recipes</h1>
-    {% for recipe in selected_recipes %}
-    <div>
-      <p>{{recipe.strMeal}}</p>
-      <img src="{{recipe.strMealThumb}}" alt="" />
-      <p>Meal ID: {{recipe.idMeal}}</p>
+    {% for meal in selected_meals %}
+    <div class="meal-container">
+      <p>{{meal.strMeal}}</p>
+      <!-- <img class="meal-img" src="{{meal.strMealThumb}}" alt="" /> -->
     </div>
 
     {% endfor %}

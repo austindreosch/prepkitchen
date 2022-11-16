@@ -1,8 +1,8 @@
 from models import connect_db
 from flask_debugtoolbar import DebugToolbarExtension
-from flask import Flask, render_template, flash, redirect
+from flask import Flask, render_template
 import os
-
+import requests
 
 # from forms import UserAddForm, LoginForm, MessageForm, EditForm
 
@@ -21,6 +21,10 @@ toolbar = DebugToolbarExtension(app)
 
 connect_db(app)
 
+url = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood"
+
+response = requests.get(url)
+
 
 ##############################################################################
 # Homepage and error pages
@@ -36,10 +40,25 @@ def homepage():
 @app.route('/menu')
 def show_menu():
     """Show menu preview."""
+    url = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood"
+    response = requests.get(url)
 
-    # selected_recipes =
-    requests.get('www.themealdb.com/api/json/v1/1/filter.php?c=Seafood')
-    return render_template('menu.html')
+    # import pdb
+    # pdb.set_trace()
+
+    data = response.json()
+    # data['meals'][0]['strMeal'] works
+    meals = data['meals']
+    selected_meals = []
+
+    for meal in range(len(meals)):
+        # print(i, data[i])
+        selected_meals.append(meals[meal])
+
+    # for idx, meal in meals:
+    #     selected_meals.append(meal[idx])
+
+    return render_template('menu.html', selected_meals=selected_meals)
 
 
 @app.route('/plans')
