@@ -1,0 +1,272 @@
+{% extends 'base.html' %}
+<!--  -->
+{% block content %}
+<section class="menu-container">
+  <div class="menu-categories">
+    <div class="menu-category">
+      <a href="">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-meat"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path
+            d="M13.62 8.382l1.966 -1.967a2 2 0 1 1 3.414 -1.415a2 2 0 1 1 -1.413 3.414l-1.82 1.821"
+          ></path>
+          <path
+            d="M5.904 18.596c2.733 2.734 5.9 4 7.07 2.829c1.172 -1.172 -.094 -4.338 -2.828 -7.071c-2.733 -2.734 -5.9 -4 -7.07 -2.829c-1.172 1.172 .094 4.338 2.828 7.071z"
+          ></path>
+          <path d="M7.5 16l1 1"></path>
+          <path
+            d="M12.975 21.425c3.905 -3.906 4.855 -9.288 2.121 -12.021c-2.733 -2.734 -8.115 -1.784 -12.02 2.121"
+          ></path>
+        </svg>
+        <p>Beef</p>
+      </a>
+    </div>
+
+    <div class="menu-category">
+      <a href="">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-eggs"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path
+            d="M13 22c-3 0 -4.868 -2.118 -4.995 -5c-.005 -3 1.995 -5 4.995 -5c4 0 8.01 2.5 8.005 5c-.005 2.5 -4.005 5 -8.005 5z"
+          ></path>
+          <path
+            d="M8 18c-3.03 -.196 -5 -2.309 -5 -5.38c0 -4.307 2.75 -8.625 5.5 -8.62c2.614 .005 5.248 3.915 5.5 8"
+          ></path>
+        </svg>
+        <p>Chicken</p>
+      </a>
+    </div>
+    <div class="menu-category">
+      <a href="">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-pig"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M15 11v.01"></path>
+          <path
+            d="M16 3l0 3.803a6.019 6.019 0 0 1 2.658 3.197h1.341a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-1.342a6.008 6.008 0 0 1 -1.658 2.473v2.027a1.5 1.5 0 0 1 -3 0v-.583a6.04 6.04 0 0 1 -1 .083h-4a6.04 6.04 0 0 1 -1 -.083v.583a1.5 1.5 0 0 1 -3 0v-2l.001 -.027a6 6 0 0 1 3.999 -10.473h2.5l4.5 -3z"
+          ></path>
+        </svg>
+        <p>Pork</p>
+      </a>
+    </div>
+
+    <div class="menu-category">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-fish"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path
+          d="M16.69 7.44a6.973 6.973 0 0 0 -1.69 4.56c0 1.747 .64 3.345 1.699 4.571"
+        ></path>
+        <path
+          d="M2 9.504c7.715 8.647 14.75 10.265 20 2.498c-5.25 -7.761 -12.285 -6.142 -20 2.504"
+        ></path>
+        <path d="M18 11v.01"></path>
+        <path d="M11.5 10.5c-.667 1 -.667 2 0 3"></path>
+      </svg>
+      <p>Seafood</p>
+    </div>
+
+    <div class="menu-category">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-baguette"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path
+          d="M5.628 11.283l5.644 -5.637c2.665 -2.663 5.924 -3.747 8.663 -1.205l.188 .181a2.987 2.987 0 0 1 0 4.228l-11.287 11.274a2.996 2.996 0 0 1 -4.089 .135l-.143 -.135c-2.728 -2.724 -1.704 -6.117 1.024 -8.841z"
+        ></path>
+        <path d="M9.5 7.5l1.5 3.5"></path>
+        <path d="M6.5 10.5l1.5 3.5"></path>
+        <path d="M12.5 4.5l1.5 3.5"></path>
+      </svg>
+      <p>Pasta</p>
+    </div>
+
+    <div class="menu-category">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-deer"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M3 3c0 2 1 3 4 3c2 0 3 1 3 3"></path>
+        <path d="M21 3c0 2 -1 3 -4 3c-2 0 -3 .333 -3 3"></path>
+        <path
+          d="M12 18c-1 0 -4 -3 -4 -6c0 -2 1.333 -3 4 -3s4 1 4 3c0 3 -3 6 -4 6"
+        ></path>
+        <path d="M15.185 14.889l.095 -.18a4 4 0 1 1 -6.56 0"></path>
+        <path d="M17 3c0 1.333 -.333 2.333 -1 3"></path>
+        <path d="M7 3c0 1.333 .333 2.333 1 3"></path>
+        <path d="M7 6c-2.667 .667 -4.333 1.667 -5 3"></path>
+        <path d="M17 6c2.667 .667 4.333 1.667 5 3"></path>
+        <path d="M8.5 10l-1.5 -1"></path>
+        <path d="M15.5 10l1.5 -1"></path>
+        <path d="M12 15h.01"></path>
+      </svg>
+      <p>Lamb</p>
+    </div>
+
+    <div class="menu-category">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-salad"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path
+          d="M4 11h16a1 1 0 0 1 1 1v.5c0 1.5 -2.517 5.573 -4 6.5v1a1 1 0 0 1 -1 1h-8a1 1 0 0 1 -1 -1v-1c-1.687 -1.054 -4 -5 -4 -6.5v-.5a1 1 0 0 1 1 -1z"
+        ></path>
+        <path
+          d="M18.5 11c.351 -1.017 .426 -2.236 .5 -3.714v-1.286h-2.256c-2.83 0 -4.616 .804 -5.64 2.076"
+        ></path>
+        <path
+          d="M5.255 11.008a12.204 12.204 0 0 1 -.255 -2.008v-1h1.755c.98 0 1.801 .124 2.479 .35"
+        ></path>
+        <path d="M8 8l1 -4l4 2.5"></path>
+        <path d="M13 11v-.5a2.5 2.5 0 1 0 -5 0v.5"></path>
+      </svg>
+      <p>Vegan</p>
+    </div>
+
+    <div class="menu-category">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-egg-fried"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+        <path
+          d="M14 3a5 5 0 0 1 4.872 6.13a3 3 0 0 1 .178 5.681a3 3 0 1 1 -4.684 3.626a5 5 0 1 1 -8.662 -4.996a5 5 0 1 1 4.645 -8.856a4.982 4.982 0 0 1 3.651 -1.585z"
+        ></path>
+      </svg>
+      <p>Breakfast</p>
+    </div>
+
+    <div class="menu-category">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-ice-cream-2"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M17.657 11.004a6 6 0 1 0 -11.315 0"></path>
+        <path d="M6.342 11l5.658 11l5.657 -10.996z"></path>
+      </svg>
+      <p>Dessert</p>
+    </div>
+
+    <div class="menu-category">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="icon icon-tabler icon-tabler-fridge"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <rect x="5" y="3" width="14" height="18" rx="2"></rect>
+        <path d="M5 10h14"></path>
+        <path d="M9 13v3"></path>
+        <path d="M9 6v1"></path>
+      </svg>
+      <p>Miscellaneous</p>
+    </div>
+  </div>
+
+  <div class="menu-hero">
+    <h1>Recipes</h1>
+    {% for meal in selected_meals %}
+    <div class="meal-container">
+      <p>{{meal.strMeal}}</p>
+      <!-- <img class="meal-img" src="{{meal.strMealThumb}}" alt="" /> -->
+    </div>
+
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>prepkitchen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="/static/style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <a href="/"
+        ><img class="logo" src="static/graphics/logo-long2.png" alt=""
+      /></a>
+      <nav class="main-nav">
+        <ul class="main-nav-list">
+          <li><a class="main-nav-link" href="/menu">Menu</a></li>
+          <li>
+            <a class="main-nav-link" href="/plans">Plans</a>
+          </li>
+          <li><a class="main-nav-link" href="#">About Us</a></li>
+          <li><a class="main-nav-link" href="#">Login</a></li>
+          <li><a class="main-nav-link nav-cta" href="#">Call To Action</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="container" style="margin-top: 2em">
+      {% for msg in get_flashed_messages() %}
+      <div class="alert alert-danger">{{ msg }}</div>
+      {% endfor %}
+      <!--  -->
+
+      {% block content %}
+      <!--  -->
+      {% endblock %}
+    </div>
+  </body>
+</html>
+<!-- 
+  
+ -->
