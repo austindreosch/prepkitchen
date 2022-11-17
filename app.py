@@ -1,6 +1,5 @@
 from models import connect_db
 from flask import Flask, render_template, redirect, flash
-import os
 import requests
 
 # from forms import UserAddForm, LoginForm, MessageForm, EditForm
@@ -15,7 +14,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///prepkitchen'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', "it's a secret")
+app.config['SECRET_KEY'] = ("it's a secret")
 # toolbar = DebugToolbarExtension(app)
 
 connect_db(app)
