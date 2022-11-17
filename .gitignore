@@ -3,3 +3,4 @@ venv/
 __pycache__/
 static/graphics/
 static/users/
+static/other/
