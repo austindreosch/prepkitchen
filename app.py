@@ -1,6 +1,5 @@
 from flask import Flask, render_template
 from models import connect_db
-import requests
 
 from flask import Flask, render_template
 
@@ -32,15 +31,15 @@ def homepage():
 @app.route('/menu')
 def show_menu():
     """Show menu preview."""
-    url = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood"
-    response = requests.get(url)
+    # url = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood"
+    # response = requests.get(url)
 
-    data = response.json()
-    meals = data['meals']
+    # data = response.json()
+    # meals = data['meals']
     selected_meals = []
 
-    for meal in range(len(meals)):
-        selected_meals.append(meals[meal])
+    # for meal in range(len(meals)):
+    #     selected_meals.append(meals[meal])
 
     return render_template('menu.html', selected_meals=selected_meals)
 
