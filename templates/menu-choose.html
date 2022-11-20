@@ -2,9 +2,9 @@
 <!--  -->
 {% block content %}
 
-<div class="menu-heading"><h1>{{heading}}: {{category_str.title()}}</h1></div>
+<div class="menu-heading"><h1>{{heading}}</h1></div>
 
-<section class="menu-container">
+<section class="menu-container-choose">
   <div class="menu-categories">
     <div class="menu-category">
       <a href="/menu/beef">
@@ -106,22 +106,39 @@
     </div>
   </div>
 
-  <div class="menu-hero">
+  <div class="menu-hero-choose">
     {% for meal in selected_meals %}
     <div class="meal-container">
       <div class="meal-imgdiv">
         <img class="meal-img" src="{{meal.strMealThumb}}" alt="" />
       </div>
-      <div class="meal-card">
+      <div class="meal-card-choose">
         <p class="meal-title">{{meal.strMeal.title()}}</p>
 
-        <!-- <button class="tooltip">
-          <img src="static/other/square-plus.png" alt="" />
-        </button> -->
+        <button class="tooltip">
+          <img
+            src="https://bn1304files.storage.live.com/y4mVmmXgCiDj3k81pfvO7_13pNNBybAKkp_ek5r3ofas8-B-HOl_3q3KrzoxtGWaNYrd2-jntOJr-gbV7-OxvmJqn_5iHhPALr74pL1q1eoUqag07MVr1xvhNivtH0b0i8MBo73iGbC6JBLMfeTyu3Yql8IOv8J0tFUwt5_HSuGnqhNnlAMFxxU33_ynVkwVqMXLeGWiSTvv_kLtxZ1rU28_g/square-plus.png?psid=1&width=240&height=240&cropMode=center"
+            alt=""
+          />
+        </button>
       </div>
     </div>
 
     {% endfor %}
+  </div>
+
+  <div class="menu-cart">
+    <h1 class="cart-heading">
+      <img
+        src="https://bn1304files.storage.live.com/y4mJKazWlL4bRegDmI3YjE3Ml2ThmNMVz_gt5f-L5B6TfA3i5srz3-fK5VO5ruPQn0QWRbFQ1C49P1QwMOld-iZUy5MBPp6DEe_VpBnBlAY_tSlUtrbwaYSEujgkBtLGhjKwCQVezXar3hi14qeSgGPlACpYPrsAHoev0sKxaqvV5I5gidGJxfyDhrVJ8i37h38sPWjwD0hidgxxAarveOm_A/shopping-cart.png?psid=1&width=181&height=181&cropMode=center"
+        alt=""
+      />
+    </h1>
+    <div class="cart-container"></div>
+    <div class="cart-container"></div>
+    <div class="cart-container"></div>
+    <div class="cart-container"></div>
+    <div class="cart-container"></div>
   </div>
 </section>
 
