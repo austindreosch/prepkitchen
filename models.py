@@ -32,7 +32,7 @@ class User(db.Model):
 
 class Plan(db.Model):
     """Plans model."""
-    __tablename__ = 'plan'
+    __tablename__ = 'plans'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     price = db.Column(db.Integer, nullable=False)

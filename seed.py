@@ -1,22 +1,10 @@
-from models import db, User, Plan
-
+from models import db, User, Plan, Order
+from app import db
 
 db.drop_all()
 db.create_all()
 
-# c1 = Cupcake(
-#     flavor="cherry",
-#     size="large",
-#     rating=5,
-# )
-
-# c2 = Cupcake(
-#     flavor="chocolate",
-#     size="small",
-#     rating=9,
-#     image="https://www.bakedbyrachel.com/wp-content/uploads/2018/01/chocolatecupcakesccfrosting1_bakedbyrachel.jpg"
-# )
-
+# users
 user = User(
     username="adreosch21",
     password="password123",
@@ -26,13 +14,44 @@ user = User(
     subscribed=True
 )
 
+# plans
 plan1 = Plan(
     price=29.99,
     serving_count=2,
     meal_count=3,
-    image_url="https://previews.dropbox.com/p/thumb/ABuMVgPe56wgbequNbDR8xaFGbgtz6Qh6PNKPPOriJSib7FVm9ltPGn0Nli8gT8G6XsKA9V6VB8WehKprMAP_UCpPc8Tn3ghnIQEOsk-DyOgTIUyhifhwAY9ONv-wo3J6R7ZcICC4T12E_K7V99piqE7rll9cJ27utQgDsrQrhO2NyTwlT0_n_PE06kcvZ5aHLLN7lGhTwqz-nYDzwm5mhp1qcOXiHu9lAOnZVb1P7eV1upBQhp0IDsuHytYJ5jia5pUTQcu-XFMtXAvfsrErRFZdoA54C8EULfIMFEtWf60fqKTf9W_kyIY7zxATzpgpCFvl3u_mSU6Ix-9YUi3EHjZQYKQjAQFK1E7_R0RLltkTA2Ztd78XPV94KcO-DYPvlQ/p.png",
-
+    image_url="https://i.postimg.cc/5fBHLzDx/plan1.png",
+    active=True
+)
+plan2 = Plan(
+    price=49.99,
+    serving_count=2,
+    meal_count=5,
+    image_url="https://i.postimg.cc/VsymZ8ZJ/plan2.png",
+    active=True
+)
+plan3 = Plan(
+    price=64.99,
+    serving_count=4,
+    meal_count=4,
+    image_url="https://i.postimg.cc/wznqjXx9/plan3.png",
+    active=True
 )
 
-db.session.add_all()
+# orders
+order1 = Order(
+    user_id=1,
+    plan_id=2,
+    meal_id1=52819,
+    meal_id2=52960,
+    meal_id3=52995,
+    meal_id4=52864,
+    meal_id5=53010
+)
+
+
+db.session.add(user)
+db.session.add(plan1)
+db.session.add(plan2)
+db.session.add(plan3)
+db.session.add(order1)
 db.session.commit()

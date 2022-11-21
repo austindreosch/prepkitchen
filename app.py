@@ -1,18 +1,20 @@
 from flask import Flask, render_template, redirect
 import requests
-from models import connect_db, db, User
+from models import connect_db, db, User, Order
 # from forms import NewSongForPlaylistForm, SongForm, PlaylistForm
 # from sqlalchemy.exc import IntegrityError
 # from flask_debugtoolbar import DebugToolbarExtension
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///playlist-app'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///prepkitchen'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = True
 
 connect_db(app)
 # db.create_all()
+
+# https://postimg.cc/gallery/yZCM7f4  postimg link
 
 
 @app.route("/")
@@ -108,6 +110,8 @@ def signup():
                 email=form.email.data,
                 subscribed=form.subscribed.data
             )
+
+            order = Order()
             db.session.commit()
 
         except IntegrityError:
