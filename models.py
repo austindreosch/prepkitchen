@@ -29,6 +29,15 @@ class User(db.Model):
 
     # songs = db.relationship('PlaylistSong', backref="songs")
 
+# class Cart(db.Model):
+#     """Shopping cart model."""
+#     __tablename__ = 'carts'
+    
+#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+#     username = db.Column(db.Text, nullable=False, unique=True)
+#     password = db.Column(db.Text, nullable=False)
+
+
 
 class Plan(db.Model):
     """Plans model."""

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>prepkitchen</title>
+    <!--  -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,6 +17,14 @@
       type="text/css"
       href="{{ url_for('static',filename='styles/main.css') }}"
     />
+    <!--  -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script src="/static/script.js"></script>
+    <!--  -->
   </head>
   <body>
     <header class="header">
@@ -33,9 +42,11 @@
           <li>
             <a class="main-nav-link" href="/plans">Our Plans</a>
           </li>
-          <li><a class="main-nav-link" href="#">About Us</a></li>
-          <li><a class="main-nav-link" href="#">Login</a></li>
-          <li><a class="main-nav-link nav-cta" href="#">Call To Action</a></li>
+          <!-- <li><a class="main-nav-link" href="#">About Us</a></li> -->
+          <li><a class="main-nav-link" href="/login">Login</a></li>
+          <li>
+            <a class="main-nav-link nav-cta" href="#">Join Newsletter</a>
+          </li>
         </ul>
       </nav>
     </header>
@@ -50,6 +61,8 @@
       <!--  -->
       {% endblock %}
     </div>
+    <!-- <script src="/static/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script> -->
   </body>
 </html>
 <!-- 

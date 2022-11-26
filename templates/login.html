@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+<!--  -->
+{% block content %}
+<div class="menu-heading"><h1>Login</h1></div>
+
+<form method="POST">
+  {{ form.hidden_tag() }} {% for field in form if field.widget.inputtype !=
+  'hidden' %}
+  <p>
+    {{ field.label }} {{ field(class="form-control") }} {% for error in
+    field.errors %}
+    <span>{{ error }}</span>
+    {% endfor %}
+  </p>
+  {% endfor %}
+
+  <button type="submit">Register</button>
+</form>
+
+<!--  -->
+{% endblock %}
