@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, request
 import requests
 from models import connect_db, db
 # from sqlalchemy.exc import IntegrityError
@@ -33,12 +33,10 @@ def show_plans():
 
     return render_template('plans.html')
 
-# simple api call for menu getting
-
 
 @app.route('/menu/<category_str>')
 def query(category_str):
-
+    """Normal menu, with api calls for menu change."""
     heading = "Menu"
 
     url = f"https://www.themealdb.com/api/json/v1/1/filter.php?c={category_str}"
@@ -54,77 +52,99 @@ def query(category_str):
     return render_template('menu.html', selected_meals=selected_meals, heading=heading, category_str=category_str)
 
 
-@app.route('/choose')
-def menu_choose():
+@app.route('/choose/<category_str>')
+def menu_choose(category_str):
+    """Choose menu, with buttons and shopping_cart."""
 
     heading = "Choose your meals."
     cart = []
-
     if 'cart_array' in session:
         cart = session['cart_array']
+        print(f"/choose variable: {cart}")
         # this works, but its returned a string instead of a list
 
-    cart_list = cart.split(", ")
-
-    url = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood"
-    response = requests.get(url)
+    menu_url = f"https://www.themealdb.com/api/json/v1/1/filter.php?c={category_str}"
+    response = requests.get(menu_url)
 
     data = response.json()
-    meals = data['meals']
+    meals_json = data['meals']
     selected_meals = []
 
-    for meal in range(len(meals)):
-        selected_meals.append(meals[meal])
+    for meal in range(len(meals_json)):
+        selected_meals.append(meals_json[meal])
 
-    return render_template('menu-choose.html', selected_meals=selected_meals, heading=heading, cart_list=cart_list)
+    # //////////////////
+    # //////////////////
+    # //////////////////
+    # api call to find specific category items in shopping_cart
+    print("This is cart.")
+    print(cart)
+    cart_items = []
+    for item_id in cart:
+        item_url = f"https://www.themealdb.com/api/json/v1/1/lookup.php?i={item_id}"
+        print("This is item_id")
+        print(item_id)
+        print("This is item_url.")
+        print(item_url)
+        id_response = requests.get(item_url)
+
+        data = id_response.json()
+        item = data['meals']
+        print(item.idMeal)
+        cart_items.append(
+            {
+                "idMeal": item.idMeal,
+                "strMeal": item.strMeal,
+                "strMealThumb": item.strMealThumb
+            }
+        )
+
+    # for item in range(len(items)):
+    #     cart_items.append(items[item])
+
+    return render_template('menu-choose.html', selected_meals=selected_meals, heading=heading, session_cart_list=cart, cart_items=cart_items)
 
 
 @app.route("/cart", methods=["POST"])
 def shopping_cart():
-    """API for shopping_cart saving."""
+    """API for shopping_cart saving. Data sent from JS."""
     cart_array = []
-
-    # should be able to do this without loop
+    # pull the data sent from JS ajax post
     keys = request.form.keys()
     for key in keys:
         cart_array = key
-
-    print(cart_array)
-
+    # (should be able to do this without loop)
+    print(f"/cart variable: {cart_array}")
     # add cart_array to user session
     session['cart_array'] = cart_array
 
-    return redirect('/choose')
+    # ///////////////
+    # ///////////////
+    # ///////////////
+
+    return redirect(request.referrer)
 
 
-@app.route("/cart/clear", methods=["POST"])
+# @app.route("/cart/reload")
+# def cart_reload():
+#     """reloads page for cart update."""
+
+#     # this is working, but its not allowing multiple things in the cart array
+
+#     return redirect(request.referrer)
+
+
+@app.route("/cart/clear")
 def cart_clear():
     """POST for clearing cart session."""
 
     if 'cart_array' in session:
-        session['cart_array'] = []
+        session['cart_array'] = None
 
-    return redirect('/choose')
-
-
-# @ app.route('/choose/post', methods=['POST'])
-# def menu_choose_post():
-
-#     heading = "Choose your meals."
-
-#     url = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood"
-#     response = requests.get(url)
-
-#     data = response.json()
-#     meals = data['meals']
-#     selected_meals = []
-
-#     for meal in range(len(meals)):
-#         selected_meals.append(meals[meal])
-
-#     return redirect('/choose')
+    return redirect(request.referrer)
 
 
+# ####################
 # USERS
 # ####################
 @ app.route('/login', methods=["GET", "POST"])

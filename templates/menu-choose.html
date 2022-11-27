@@ -1,75 +1,78 @@
 {% extends 'base.html' %}
 <!--  -->
 {% block content %}
-
-<div class="menu-heading"><h1>{{heading}} {{session['cart_array']}}</h1></div>
+<p>
+  <!-- Session: {{session['cart_array']}}  -->
+  Session Cart: {{session_cart_list}}
+</p>
+<div class="menu-heading"><h1>{{heading}}</h1></div>
 
 <section class="menu-container-choose">
   <div class="menu-categories">
     <div class="menu-category">
-      <a href="/menu/beef">
+      <a href="/choose/beef">
         <img src="https://i.postimg.cc/Y9Fk2n02/meat.png" alt="" />
         <p>Beef</p>
       </a>
     </div>
 
     <div class="menu-category">
-      <a href="/menu/chicken">
+      <a href="/choose/chicken">
         <img src="https://i.postimg.cc/gjPpxVLV/egg-cracked.png" alt="" />
         <p>Chicken</p>
       </a>
     </div>
     <div class="menu-category">
-      <a href="/menu/pork">
+      <a href="/choose/pork">
         <img src="https://i.postimg.cc/x1d2NT84/pig.png" alt="" />
         <p>Pork</p>
       </a>
     </div>
 
     <div class="menu-category">
-      <a href="/menu/seafood">
+      <a href="/choose/seafood">
         <img src="https://i.postimg.cc/SR7hCncw/fish.png" alt="" />
         <p>Seafood</p>
       </a>
     </div>
     <!-- NO LINKS -->
     <div class="menu-category">
-      <a href="/menu/pasta">
+      <a href="/choose/pasta">
         <img src="https://i.postimg.cc/NfBYYxcY/baguette.png" alt="" />
         <p>Pasta</p>
       </a>
     </div>
 
     <div class="menu-category">
-      <a href="/menu/lamb">
+      <a href="/choose/lamb">
         <img src="https://i.postimg.cc/HWQHfhFB/deer.png" alt="" />
         <p>Lamb</p>
       </a>
     </div>
 
     <div class="menu-category">
-      <a href="/menu/vegetarian">
+      <a href="/choose/vegetarian">
         <img src="https://i.postimg.cc/fTCsb0zd/salad.png" alt="" />
         <p>Vegan</p>
       </a>
     </div>
 
     <div class="menu-category">
-      <a href="/menu/breakfast">
+      <a href="/choose/breakfast">
         <img src="https://i.postimg.cc/FKdXGWjb/egg-fried.png" alt="" />
         <p>Breakfast</p>
       </a>
     </div>
 
     <div class="menu-category">
-      <a href="/menu/dessert">
+      <a href="/choose/dessert">
         <img src="https://i.postimg.cc/W1fPGLJb/ice-cream.png" alt="" />
         <p>Dessert</p>
       </a>
     </div>
 
     <div class="menu-category">
-      <a href="/menu/miscellaneous">
+      <a href="/choose/miscellaneous">
         <img src="https://i.postimg.cc/43Dk065D/fridge.png" alt="" />
         <p>Misc.</p>
       </a>
@@ -86,7 +89,6 @@
         <p class="meal-title">{{meal.strMeal.title()}}</p>
 
         <button id="{{meal.idMeal}}" class="tooltip cartbutton">
-          <!-- onclick="AddToCart({{meal.idMeal}})" -->
           <img
             src="https://bn1304files.storage.live.com/y4mVmmXgCiDj3k81pfvO7_13pNNBybAKkp_ek5r3ofas8-B-HOl_3q3KrzoxtGWaNYrd2-jntOJr-gbV7-OxvmJqn_5iHhPALr74pL1q1eoUqag07MVr1xvhNivtH0b0i8MBo73iGbC6JBLMfeTyu3Yql8IOv8J0tFUwt5_HSuGnqhNnlAMFxxU33_ynVkwVqMXLeGWiSTvv_kLtxZ1rU28_g/square-plus.png?psid=1&width=240&height=240&cropMode=center"
             alt=""
@@ -100,19 +102,72 @@
 
   <div class="menu-cart">
     <div class="cart-heading">
-      <img
-        src="https://bn1304files.storage.live.com/y4mJKazWlL4bRegDmI3YjE3Ml2ThmNMVz_gt5f-L5B6TfA3i5srz3-fK5VO5ruPQn0QWRbFQ1C49P1QwMOld-iZUy5MBPp6DEe_VpBnBlAY_tSlUtrbwaYSEujgkBtLGhjKwCQVezXar3hi14qeSgGPlACpYPrsAHoev0sKxaqvV5I5gidGJxfyDhrVJ8i37h38sPWjwD0hidgxxAarveOm_A/shopping-cart.png?psid=1&width=181&height=181&cropMode=center"
-        alt=""
-      />
+      <img src="https://i.postimg.cc/G2vwn4gH/shopping-cart.png" alt="" />
     </div>
-    <div class="cart-container">{{cart_list[0]}}</div>
-    <div class="cart-container"></div>
-    <div class="cart-container"></div>
-    <div class="cart-container"></div>
-    <div class="cart-container"></div>
-    <a href="/cart/clear">
-      <img src="https://i.postimg.cc/gjPpxVLV/egg-cracked.png" alt="" />
-      <p>Clear Cart</p>
+    <!--  -->
+    {% for item in cart_items %}
+    <div class="cart-container">
+      <div class="cart-imgdiv">
+        <img class="cart-img" src="{{item.idMeal}}}" alt="" />
+      </div>
+      <div class="cart-card">
+        <p class="cart-title">{{item.strMeal.title()}}</p>
+      </div>
+    </div>
+    {% endfor %}
+
+    <!-- <div class="cart-container">
+      <div class="cart-imgdiv">
+        <img
+          class="cart-img"
+          src="https://www.themealdb.com/images/media/meals/vvpprx1487325699.jpg"
+          alt=""
+        />
+      </div>
+      <div class="cart-card">
+        <p class="cart-title">Meal Title</p>
+      </div>
+    </div>
+    <div class="cart-container">
+      <div class="cart-imgdiv">
+        <img
+          class="cart-img"
+          src="https://www.themealdb.com/images/media/meals/vvpprx1487325699.jpg"
+          alt=""
+        />
+      </div>
+      <div class="cart-card">
+        <p class="cart-title">Meal Title</p>
+      </div>
+    </div>
+    <div class="cart-container">
+      <div class="cart-imgdiv">
+        <img
+          class="cart-img"
+          src="https://www.themealdb.com/images/media/meals/vvpprx1487325699.jpg"
+          alt=""
+        />
+      </div>
+      <div class="cart-card">
+        <p class="cart-title">Meal Title</p>
+      </div>
+    </div>
+    <div class="cart-container">
+      <div class="cart-imgdiv">
+        <img
+          class="cart-img"
+          src="https://www.themealdb.com/images/media/meals/vvpprx1487325699.jpg"
+          alt=""
+        />
+      </div>
+      <div class="cart-card">
+        <p class="cart-title">Meal Title</p>
+      </div>
+    </div> -->
+
+    <!--  -->
+    <a class="cart-clearbtn" href="/cart/clear">
+      <img src="https://i.postimg.cc/T1W0P4cT/square-x.png" alt="" />
     </a>
   </div>
 </section>
