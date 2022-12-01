@@ -53,8 +53,13 @@ $(document).ready(function() {
                         // use api data here, if needed
                     }   
                 })
-                location.reload();
+
+                // location.reload();
+                setTimeout(() => {
+                    location.reload();
+                  }, 10)
             }
+            
         }
     })
 

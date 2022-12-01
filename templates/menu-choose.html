@@ -3,7 +3,7 @@
 {% block content %}
 <p>
   <!-- Session: {{session['cart_array']}}  -->
-  Session Cart: {{session_cart_list}}
+  Session Cart: {{session_cart}}
 </p>
 <div class="menu-heading"><h1>{{heading}}</h1></div>
 
@@ -103,67 +103,20 @@
   <div class="menu-cart">
     <div class="cart-heading">
       <img src="https://i.postimg.cc/G2vwn4gH/shopping-cart.png" alt="" />
+      <!-- <div><p>Cart Size: {{cart_length}}</p></div> -->
     </div>
     <!--  -->
-    {% for item in cart_items %}
+    {% for item in response_cart %}
     <div class="cart-container">
       <div class="cart-imgdiv">
-        <img class="cart-img" src="{{item.idMeal}}}" alt="" />
+        <img class="cart-img" src="{{item.strMealThumb}}" alt="" />
       </div>
       <div class="cart-card">
-        <p class="cart-title">{{item.strMeal.title()}}</p>
+        <p class="cart-title">{{item.strMeal}}</p>
+        <p>blah</p>
       </div>
     </div>
     {% endfor %}
-
-    <!-- <div class="cart-container">
-      <div class="cart-imgdiv">
-        <img
-          class="cart-img"
-          src="https://www.themealdb.com/images/media/meals/vvpprx1487325699.jpg"
-          alt=""
-        />
-      </div>
-      <div class="cart-card">
-        <p class="cart-title">Meal Title</p>
-      </div>
-    </div>
-    <div class="cart-container">
-      <div class="cart-imgdiv">
-        <img
-          class="cart-img"
-          src="https://www.themealdb.com/images/media/meals/vvpprx1487325699.jpg"
-          alt=""
-        />
-      </div>
-      <div class="cart-card">
-        <p class="cart-title">Meal Title</p>
-      </div>
-    </div>
-    <div class="cart-container">
-      <div class="cart-imgdiv">
-        <img
-          class="cart-img"
-          src="https://www.themealdb.com/images/media/meals/vvpprx1487325699.jpg"
-          alt=""
-        />
-      </div>
-      <div class="cart-card">
-        <p class="cart-title">Meal Title</p>
-      </div>
-    </div>
-    <div class="cart-container">
-      <div class="cart-imgdiv">
-        <img
-          class="cart-img"
-          src="https://www.themealdb.com/images/media/meals/vvpprx1487325699.jpg"
-          alt=""
-        />
-      </div>
-      <div class="cart-card">
-        <p class="cart-title">Meal Title</p>
-      </div>
-    </div> -->
 
     <!--  -->
     <a class="cart-clearbtn" href="/cart/clear">

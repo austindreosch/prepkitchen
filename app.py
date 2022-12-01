@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, redirect, session, request
+from flask import Flask, render_template, session, request, redirect
 import requests
-from models import connect_db, db
+from models import connect_db
 # from sqlalchemy.exc import IntegrityError
 # from flask_debugtoolbar import DebugToolbarExtension
 
@@ -51,18 +51,50 @@ def query(category_str):
 
     return render_template('menu.html', selected_meals=selected_meals, heading=heading, category_str=category_str)
 
+#
+#
+#
+#
+
+# class CartItem:
+#     def __init__(self,
+
 
 @app.route('/choose/<category_str>')
 def menu_choose(category_str):
     """Choose menu, with buttons and shopping_cart."""
 
     heading = "Choose your meals."
-    cart = []
-    if 'cart_array' in session:
-        cart = session['cart_array']
-        print(f"/choose variable: {cart}")
-        # this works, but its returned a string instead of a list
+    session_cart = []
+    id_cart = []
+    response_cart = []
 
+    # SHOPPING CART API CALLS
+    if 'cart_array' in session:
+        # turn session string into a list of ids
+        session_cart = session['cart_array'].lstrip(
+            '["').rstrip('"]').split('","')
+        id_cart = [eval(i) for i in session_cart]
+
+        cart_length = len(id_cart)
+
+    for item_id in id_cart:
+        item_url = f"https://www.themealdb.com/api/json/v1/1/lookup.php?i={item_id}"
+
+        item_response = requests.get(item_url)
+        item_data = item_response.json()
+        item = item_data['meals']
+        response_cart.append(
+            {
+                "idMeal": eval(item[0]["idMeal"]),
+                "strMeal": item[0]["strMeal"].title(),
+                "strMealThumb": item[0]["strMealThumb"]
+            }
+        )
+
+    print(response_cart)
+
+    # MENU API CALLS
     menu_url = f"https://www.themealdb.com/api/json/v1/1/filter.php?c={category_str}"
     response = requests.get(menu_url)
 
@@ -73,36 +105,7 @@ def menu_choose(category_str):
     for meal in range(len(meals_json)):
         selected_meals.append(meals_json[meal])
 
-    # //////////////////
-    # //////////////////
-    # //////////////////
-    # api call to find specific category items in shopping_cart
-    print("This is cart.")
-    print(cart)
-    cart_items = []
-    for item_id in cart:
-        item_url = f"https://www.themealdb.com/api/json/v1/1/lookup.php?i={item_id}"
-        print("This is item_id")
-        print(item_id)
-        print("This is item_url.")
-        print(item_url)
-        id_response = requests.get(item_url)
-
-        data = id_response.json()
-        item = data['meals']
-        print(item.idMeal)
-        cart_items.append(
-            {
-                "idMeal": item.idMeal,
-                "strMeal": item.strMeal,
-                "strMealThumb": item.strMealThumb
-            }
-        )
-
-    # for item in range(len(items)):
-    #     cart_items.append(items[item])
-
-    return render_template('menu-choose.html', selected_meals=selected_meals, heading=heading, session_cart_list=cart, cart_items=cart_items)
+    return render_template('menu-choose.html', selected_meals=selected_meals, heading=heading, session_cart=session_cart, response_cart=response_cart)
 
 
 @app.route("/cart", methods=["POST"])
@@ -114,13 +117,12 @@ def shopping_cart():
     for key in keys:
         cart_array = key
     # (should be able to do this without loop)
-    print(f"/cart variable: {cart_array}")
     # add cart_array to user session
-    session['cart_array'] = cart_array
+    # print("THIS IS CART ARRAY")
+    # print(cart_array, type(cart_array))
+    # print("Cart ARRAY Length:", len(cart_array))
 
-    # ///////////////
-    # ///////////////
-    # ///////////////
+    session['cart_array'] = cart_array
 
     return redirect(request.referrer)
 
@@ -139,7 +141,7 @@ def cart_clear():
     """POST for clearing cart session."""
 
     if 'cart_array' in session:
-        session['cart_array'] = None
+        del session['cart_array']
 
     return redirect(request.referrer)
 
