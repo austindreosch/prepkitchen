@@ -16,7 +16,7 @@ Spacing system (px):
 
 --- 02 COLORS
 Primary: #e67e22, #68bf54
-#fa9746 #96c38c #2a4f96
+#fa9746 #96c38c #2a4f96 #ffca79
 Tints: #fdf2e9
 Shades:
 Accents:
@@ -186,7 +186,7 @@ NAVIGATION
 
 
 /****************** 
-HERO SECTION
+FRONT HERO SECTION
 *******************/
 .section-hero {
     background-color: #fff6f0;
@@ -251,6 +251,12 @@ PLANS
     background-color: #fff6f0;
 }
 
+.plan-menu-heading {
+    font-size: 3rem;
+    text-align: center;
+    margin: auto;
+}
+
 .plans {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -264,7 +270,8 @@ PLANS
 .plan {
     background-color: #ffffff;
     max-width: 50rem;
-    padding: 5rem;
+    padding: 2rem;
+    padding-top: 3rem;
     border-radius: 20px;
     text-align: center;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
@@ -320,8 +327,8 @@ MENU
 .menu-container {
     background-color: #fff6f0;
     display: grid;
-    grid-template-columns: 20% 80%;
-    max-width: 180rem;
+    grid-template-columns: 15% 85%;
+    max-width: 150rem;
     justify-content: center;
     gap: 1rem;
     margin: auto;
@@ -361,6 +368,8 @@ MENU
     padding: 2.5rem 1rem;
     text-align: center;
     text-decoration: none;
+    border-radius: 8px;
+    /* border: 1px solid #fa9746; */
 }
 
 .menu-category a {
@@ -391,7 +400,7 @@ MENU
     /* background-color: #ffffff; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 1rem 1rem;
+    gap: 1rem;
     justify-content: center;
 }
 
@@ -411,8 +420,10 @@ MENU
     overflow: hidden;
     display: grid;
     grid-template-rows: 75% 25%;
-    margin: 5px;
+    margin: 5px auto;
     margin-top: 0;
+    border-radius: 20px;
+    border: 3px solid #96c38c;
 }
 
 .meal-imgdiv {     /* Equals maximum image height */
@@ -477,17 +488,21 @@ CART (FOR CHOOSE)
     background-color: #ffffff;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     width: 100%;
-    height: 600px;
+    height: 640px;
     align-items: center;
     text-align: center;
     margin: 0 auto;
     justify-content: center;
+    /* border: 3px solid #2a4f96; */
+    border-radius: 6px;
 }
 .cart-heading {
-    margin-top: -60px;
+    margin-top: -19px;
     align-items: center;
     text-align: center;
-    width: 50px;
+    width: 100%;
+    font-weight: 700;
+    font-size: 1.4rem;
 }
 .cart-heading img{
     width: 50px;
@@ -495,25 +510,71 @@ CART (FOR CHOOSE)
     text-align: center;
     margin: 0 auto;
     justify-content: center;
-    margin-left: 50px;
+    margin-left: 57px;
 
 }
+.cart-plan-container {
+    width: 100%;
+    height: 65px;
+    background-color: #ffffff;
+    /* margin: 5px 0; */
+}
+
+.cart-plan-inner {
+    background-color: #fa9746;
+    border-radius: 8px;
+    padding: 8px 0;
+    margin: 8px;
+    margin-top: 14px;
+}
+.cart-plan-inner p {
+    font-size: 1.3rem;
+    color: white;
+    font-weight: 600;
+    
+}
+
+.cart-plan-innergrid {
+    display: grid;
+    grid-template-columns: 85% 15%;
+}
+
+
+.cart-plan-inner-plan {
+    background-color: #96c38c;
+    padding: 4px;
+    margin: 2px 6px;
+    margin-left: 12px;
+    border-radius: 8px;
+    
+}
+.cart-plan-inner-plan p {
+    color: white;
+}
+.cart-plan-inner-editbtn img {
+    width: 20px;
+    margin-top: 7.5px;
+    margin-left: -12px;
+}
+
+
 .cart-container {
-    margin-top: 10px;
     width: 90%;
     height: 100px;
     /* border: 1px solid black; */
     align-items: center;
-    margin: auto;
-    margin-top: 18.5px;
+    /* margin-top: 18.5px; */
+    margin: 12px auto;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    border-radius: 8px;
+    
 }
 
 
 .cart-container{
     overflow: hidden;
     display: grid;
-    grid-template-rows: 75% 25%;
+    grid-template-rows: 70% 30%;
 }
 
 .cart-imgdiv {     /* Equals maximum image height */
@@ -528,15 +589,57 @@ CART (FOR CHOOSE)
 }
 
 .cart-card {
-    background-color: #ffffff;
-    padding: 7px;
+    background-color: #ffca79;
+    height: 40px;
+    width: 100%;
+    
     margin-top: 1px;
+    font-size: 1.1rem;
+    /* display: grid;
+    grid-template-columns: 85% 15%; */
+}
+
+.cart-card-title {
+    color: black;
+    margin: auto;
+    padding-top: 7px;
+    font-size: 1.1rem;
+    font-weight: 600;
+
+}
+.cart-card-deletebtn {
+    width: 100%;
+}
+.cart-card-deletebtn a{
+    width: 100%;
+    /* padding: 0 2px;
+    margin: auto; */
+
 }
 
 .cart-clearbtn img {
-    margin-top: 20px;
+    margin-top: 5px;
     width: 30px;
 } 
+
+/****************** 
+LOGIN PAGE
+*******************/
+
+.login-form {
+    margin: 0 auto;
+    align-items: center;
+    text-align: center;
+    padding: 30px;
+}
+
+.login-form form p {
+    margin: 10px 0;
+}
+
+
+
+
 
 
 
@@ -545,7 +648,7 @@ CART (FOR CHOOSE)
 ADD BUTTON
 *******************/
 
-button {
+.add-button {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -556,9 +659,10 @@ button {
     border-radius: 1em;
     transition: all 0.2s linear;
     margin: auto .6rem;
+    cursor: pointer;
    }
    
-   button:hover {
+   .add-button:hover {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     background-color: #9ad58c;
    }

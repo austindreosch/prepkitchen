@@ -1,0 +1,11 @@
+database pull for servings counter in shopping cart
+
+delete button for each cart item
+
+/profile
+/profile/orders
+/profile/edit
+/profile/edit
+/login
+/register
+/recipe/<int>

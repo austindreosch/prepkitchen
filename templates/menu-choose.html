@@ -1,11 +1,9 @@
 {% extends 'base.html' %}
 <!--  -->
 {% block content %}
-<p>
-  <!-- Session: {{session['cart_array']}}  -->
-  Session Cart: {{session_cart}}
-</p>
-<div class="menu-heading"><h1>{{heading}}</h1></div>
+<div class="menu-heading">
+  <h1 class="menu-heading-h1">{{heading}}</h1>
+</div>
 
 <section class="menu-container-choose">
   <div class="menu-categories">
@@ -88,11 +86,8 @@
       <div class="meal-card-choose">
         <p class="meal-title">{{meal.strMeal.title()}}</p>
 
-        <button id="{{meal.idMeal}}" class="tooltip cartbutton">
-          <img
-            src="https://bn1304files.storage.live.com/y4mVmmXgCiDj3k81pfvO7_13pNNBybAKkp_ek5r3ofas8-B-HOl_3q3KrzoxtGWaNYrd2-jntOJr-gbV7-OxvmJqn_5iHhPALr74pL1q1eoUqag07MVr1xvhNivtH0b0i8MBo73iGbC6JBLMfeTyu3Yql8IOv8J0tFUwt5_HSuGnqhNnlAMFxxU33_ynVkwVqMXLeGWiSTvv_kLtxZ1rU28_g/square-plus.png?psid=1&width=240&height=240&cropMode=center"
-            alt=""
-          />
+        <button id="{{meal.idMeal}}" class="add-button tooltip cartbutton">
+          <img src="https://i.postimg.cc/Px1Cv5vh/square-plus-3.png" alt="" />
         </button>
       </div>
     </div>
@@ -101,10 +96,36 @@
   </div>
 
   <div class="menu-cart">
-    <div class="cart-heading">
-      <img src="https://i.postimg.cc/G2vwn4gH/shopping-cart.png" alt="" />
-      <!-- <div><p>Cart Size: {{cart_length}}</p></div> -->
+    <div id="{{session_meal_cap}}" class="cart-heading">
+      <div>
+        {% if session['cart_length'] < session_meal_cap %} Choose
+        {{session_meal_cap - session['cart_length']}} more meals. {% else %}
+        <a href="">Checkout</a>
+        {% endif %}
+      </div>
     </div>
+    <!--  -->
+    <div class="cart-plan-container">
+      <div class="cart-plan-inner">
+        <p>SELECTED PLAN</p>
+
+        <div class="cart-plan-innergrid">
+          <div class="cart-plan-inner-plan">
+            <p>2 servings.</p>
+            <p>{{session_meal_cap}} meals.</p>
+          </div>
+          <div class="cart-plan-inner-editbtn">
+            <a href="/plans">
+              <img
+                src="https://i.postimg.cc/qv1jrzZN/edit-1-white.png"
+                alt=""
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  -->
     <!--  -->
     {% for item in response_cart %}
     <div class="cart-container">
@@ -112,8 +133,12 @@
         <img class="cart-img" src="{{item.strMealThumb}}" alt="" />
       </div>
       <div class="cart-card">
-        <p class="cart-title">{{item.strMeal}}</p>
-        <p>blah</p>
+        <div class="cart-card-title"><p>{{item.strMeal}}</p></div>
+        <!-- <div class="cart-card-deletebtn">
+          <a href=""
+            ><img src="https://i.postimg.cc/hPSHbsMk/backspace-2.png" alt=""
+          /></a>
+        </div> -->
       </div>
     </div>
     {% endfor %}

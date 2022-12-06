@@ -28,15 +28,12 @@ class User(db.Model):
     subscribed = db.Column(db.Boolean, default=False)
 
     # songs = db.relationship('PlaylistSong', backref="songs")
+    # songs = db.relationship('Song',
+    #                         secondary='playlists_songs',
+    #                         backref='playlists')
 
-# class Cart(db.Model):
-#     """Shopping cart model."""
-#     __tablename__ = 'carts'
-    
-#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-#     username = db.Column(db.Text, nullable=False, unique=True)
-#     password = db.Column(db.Text, nullable=False)
-
+    orders = db.relationship('Order',
+                             secondary='plans', backref='users')
 
 
 class Plan(db.Model):
@@ -68,3 +65,13 @@ class Order(db.Model):
     meal_id3 = db.Column(db.Integer, nullable=False)
     meal_id4 = db.Column(db.Integer)
     meal_id5 = db.Column(db.Integer)
+
+
+# class Cart(db.Model):
+#     """Shopping cart model."""
+#     __tablename__ = 'carts'
+5150
+
+#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+#     username = db.Column(db.Text, nullable=False, unique=True)
+#     password = db.Column(db.Text, nullable=False)
