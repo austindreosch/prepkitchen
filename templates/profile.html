@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+<!--  -->
+{% block content %}
+<div class="menu-heading"><h1>Profile</h1></div>
+<!--  -->
+<div class="profile-container">
+  <div class="profile-orders-container">
+    <div class="profile-orders-title">
+      <p>Your Orders</p>
+      {{user.orders}}
+    </div>
+    <div class="profile-orders">
+      {% for order in user_orders %}<!-- for each order -->
+      <div class="profile-order">
+        {% for meal in order_meal_ids %}<!-- for each meal in order -->
+        <div class="profile-order-meal">
+          <div class="profile-order-meal-imgdiv">
+            <img
+              src="https://www.themealdb.com/images/media/meals/atd5sh1583188467.jpg"
+              alt=""
+            />
+          </div>
+          <div class="profile-order-meal-card">
+            <div class="profile-order-meal-card-title">
+              <p>Meal Title</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}<!-- end of meals loop -->
+        <div class="profile-order-meal-info">
+          <p>Date</p>
+          <p>Plan</p>
+          <p>Order Again</p>
+        </div>
+      </div>
+      {% endfor %}<!-- end of orders loop -->
+    </div>
+  </div>
+
+  <div class="profile-info-container">
+    <div>
+      <p>Your Info</p>
+      <p>{{user.first_name}} {{user.last_name}}</p>
+      <p>{{user.email}}</p>
+      <p>Address</p>
+      <p>{{user.address_street}}</p>
+      <p>{{user.address_city}}, {{user.address_state}} {{user.address_zip}}</p>
+    </div>
+    <div><p>Edit Profile</p></div>
+    <div>
+      <p><a href="/plans">Start New Order</a></p>
+    </div>
+  </div>
+</div>
+
+<!--  -->
+{% endblock %}

@@ -1,9 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-# from flask_bcrypt import Bcrypt
+from flask_bcrypt import Bcrypt
 
 db = SQLAlchemy()
-# bcrypt = Bcrypt()
+bcrypt = Bcrypt()
 
 # DO NOT MODIFY THIS FUNCTION
 
@@ -25,15 +25,31 @@ class User(db.Model):
     first_name = db.Column(db.Text, nullable=False)
     last_name = db.Column(db.Text, nullable=False)
     email = db.Column(db.Text, nullable=False)
+    address_street = db.Column(db.Text, nullable=False)
+    address_city = db.Column(db.Text, nullable=False)
+    address_state = db.Column(db.Text, nullable=False)
+    address_zip = db.Column(db.Text, nullable=False)
     subscribed = db.Column(db.Boolean, default=False)
+    orders = db.relationship('Order', backref='users')
 
-    # songs = db.relationship('PlaylistSong', backref="songs")
-    # songs = db.relationship('Song',
-    #                         secondary='playlists_songs',
-    #                         backref='playlists')
+    @classmethod
+    def register(cls, username, pwd, first_name, last_name, email, address_street, address_city, address_state, address_zip, subscribed):
 
-    orders = db.relationship('Order',
-                             secondary='plans', backref='users')
+        hashed = bcrypt.generate_password_hash(pwd)
+
+        hash_str = hashed.decode("utf8")
+
+        return cls(username=username, password=hash_str, first_name=first_name, last_name=last_name, email=email, address_street=address_street, address_city=address_city, address_state=address_state, address_zip=address_zip, subscribed=subscribed)
+
+    @classmethod
+    def authenticate(cls, username, pwd):
+
+        user = User.query.filter_by(username=username).first()
+
+        if user and bcrypt.check_password_hash(user.password, pwd):
+            return user
+        else:
+            return False
 
 
 class Plan(db.Model):

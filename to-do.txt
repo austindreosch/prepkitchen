@@ -1,7 +1,7 @@
-database pull for servings counter in shopping cart
-
 delete button for each cart item
+recipe button for each menu item (on menu and orders page)
 
+/checkout
 /profile
 /profile/orders
 /profile/edit

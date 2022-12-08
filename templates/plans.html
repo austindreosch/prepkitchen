@@ -5,30 +5,16 @@
 <!-- <div class="plan-menu-heading"><h1>Plans</h1></div> -->
 <section class="plans-container">
   <div class="plans">
-    <div class="plan plan-low">
-      <h2 class="plan-bigtext">$29.99<small>/mo</small></h2>
+    {% for plan in plans %}
+    <div class="plan">
+      <h2 class="plan-bigtext">${{plan.price - 0.01}}<small>/mo</small></h2>
       <hr />
-      <p>2 servings per meal.</p>
-      <p>3 meals per week.</p>
-      <img src="https://i.postimg.cc/5fBHLzDx/plan1.png" alt="" />
-      <a href="/plans/1" class="btn btn--full-green">Get started.</a>
+      <p>{{plan.serving_count}} servings per meal.</p>
+      <p>{{plan.meal_count}} meals per week.</p>
+      <img src="{{plan.image_url}}" alt="" />
+      <a href="/plans/{{plan.id}}" class="btn btn--full-green">Get started.</a>
     </div>
-    <div class="plan plan-mid">
-      <h2 class="plan-bigtext">$49.99<small>/mo</small></h2>
-      <hr />
-      <p>2 servings per meal.</p>
-      <p>5 meals per week.</p>
-      <img src="https://i.postimg.cc/FFzF6dPJ/plan2.png" alt="" />
-      <a href="/plans/2" class="btn btn--full-green">Get started.</a>
-    </div>
-    <div class="plan plan-high">
-      <h2 class="plan-bigtext">$64.99<small>/mo</small></h2>
-      <hr />
-      <p>4 servings per meal.</p>
-      <p>4 meals per week.</p>
-      <img src="https://i.postimg.cc/w98y12ff/plan3.png" alt="" />
-      <a href="/plans/3" class="btn btn--full-green">Get started.</a>
-    </div>
+    {% endfor %}
   </div>
 </section>
 {% endblock %}

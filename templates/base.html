@@ -38,19 +38,31 @@
       <p>Cap: {{session_meal_cap}}</p>
       <p>Length: {{session['cart_length']}}</p>
       <p>Cart: {{session_cart}}</p>
+      <!-- <p>User: {{session['user_id']}}</p> -->
       <nav class="main-nav">
         <ul class="main-nav-list">
           <li>
             <a class="main-nav-link" href="/menu/miscellaneous">Our Menu</a>
           </li>
-          <li>
+          <!-- <li>
             <a class="main-nav-link" href="/plans">Our Plans</a>
-          </li>
-          <!-- <li><a class="main-nav-link" href="#">About Us</a></li> -->
-          <li><a class="main-nav-link" href="/login">Login</a></li>
+          </li> -->
+          {% if session['user_id'] %}
           <li>
-            <a class="main-nav-link nav-cta" href="#">Join Newsletter</a>
+            <a class="main-nav-link nav-cta" href="/profile"
+              >{{session['user_id']}}</a
+            >
           </li>
+          <li>
+            <a class="main-nav-link nav-logout" href="/logout"
+              ><img src="https://i.postimg.cc/7YTt5qs3/logout.png" alt=""
+            /></a>
+          </li>
+          {% else %}
+          <li>
+            <a class="main-nav-link nav-cta" href="/login">Login</a>
+          </li>
+          {% endif %}
         </ul>
       </nav>
     </header>

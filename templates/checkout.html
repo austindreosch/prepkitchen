@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+<!--  -->
+{% block content %}
+<div class="checkout-form"></div>
+<div class="checkout-info">
+  <p>Plan: {{plan.serving_count}} servings. {{plan.meal_count}} meals.</p>
+  <p>Price: {{plan.price - 0.01}}</p>
+  <p>Sales Tax: {{tax}}</p>
+</div>
+<!--  -->
+{% endblock %}

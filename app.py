@@ -1,8 +1,9 @@
 from flask import Flask, render_template, session, request, redirect, flash
 import requests
-from models import connect_db, db
-from forms import LoginForm
-# from sqlalchemy.exc import IntegrityError
+from models import connect_db, db, User, Plan
+from forms import LoginForm, RegisterForm
+from sqlalchemy.exc import IntegrityError
+import math
 # from flask_debugtoolbar import DebugToolbarExtension
 
 app = Flask(__name__)
@@ -31,8 +32,9 @@ def index():
 @app.route('/plans')
 def show_plans():
     """Show plans page. Leads to ordering page."""
+    plans = Plan.query.all()
 
-    return render_template('plans.html')
+    return render_template('plans.html', plans=plans)
 
 
 @app.route('/plans/<int:plan_id>')
@@ -40,22 +42,13 @@ def choose_plan(plan_id):
     """Sets chosen plan in session. Then redirects to choose menu."""
     session['cart_plan_id'] = plan_id
 
-    # if plan 1, mealCap = 3
-    if plan_id == 1:
-        session['meal _cap'] = 3
-    elif plan_id == 2:
-        session['meal _cap'] = 5
-    elif plan_id == 3:
-        session['meal _cap'] = 4
-    else:
-        # if unknown plan number
-        session['meal _cap'] = 3
-        session['cart_plan_id'] = 1
+    plan = Plan.query.filter_by(id=plan_id).first()
+    session['meal _cap'] = plan.meal_count
 
     return redirect('/choose/pork')
 
 
-@app.route('/menu/<category_str>')
+@ app.route('/menu/<category_str>')
 def query(category_str):
     """Normal menu, with api calls for menu change."""
     heading = "Menu"
@@ -73,7 +66,7 @@ def query(category_str):
     return render_template('menu.html', selected_meals=selected_meals, heading=heading, category_str=category_str)
 
 
-@app.route('/choose/<category_str>')
+@ app.route('/choose/<category_str>')
 def menu_choose(category_str):
     """Choose menu, with buttons and shopping_cart."""
 
@@ -131,10 +124,13 @@ def menu_choose(category_str):
     if 'meal _cap' in session:
         session_meal_cap = session['meal _cap']
 
-    return render_template('menu-choose.html', selected_meals=selected_meals, heading=heading, session_cart=session_cart, response_cart=response_cart, session_plan_id=session_plan_id, session_meal_cap=session_meal_cap)
+    # DATABASE PULLS
+    plan = Plan.query.filter_by(id=session['cart_plan_id']).first()
+
+    return render_template('menu-choose.html', selected_meals=selected_meals, heading=heading, session_cart=session_cart, response_cart=response_cart, session_plan_id=session_plan_id, session_meal_cap=session_meal_cap, plan=plan)
 
 
-@app.route("/cart", methods=["POST"])
+@ app.route("/cart", methods=["POST"])
 def shopping_cart():
     """API for shopping_cart saving. Data sent from JS."""
     cart_array = []
@@ -149,7 +145,7 @@ def shopping_cart():
     return redirect(request.referrer)
 
 
-@app.route("/cart/clear")
+@ app.route("/cart/clear")
 def cart_clear():
     """POST for clearing cart session."""
 
@@ -160,13 +156,16 @@ def cart_clear():
     return redirect(request.referrer)
 
 
-@app.route("/checkout")
+@ app.route("/checkout")
 def checkout():
     """Deal with checkout, and database saving."""
-    return render_template('checkout.html')
+    plan = Plan.query.filter_by(id=session['cart_plan_id']).first()
+
+    tax = math.ceil(((plan.price - 0.01) * 0.0725) * 100) / 100
+    return render_template('checkout.html', plan=plan, tax=tax)
 
 
-@app.route("/recipe/<int:meal_id>")
+@ app.route("/recipe/<int:meal_id>")
 def profile_show_meal(meal_id):
     """Show recipe and ingredients for a given meal."""
     return render_template('recipe.html')
@@ -176,18 +175,27 @@ def profile_show_meal(meal_id):
 # USERS
 # ####################
 
-@app.route("/profile")
+@ app.route("/profile")
 def profile():
-    """"""
-    return render_template('profile.html')
+    """Shows account information for a given user. Along with past orders, and links to recipes/ingredients."""
+    # session['user_id'] = "adreosch1"
+    # look up user id based on username
+    # look up orders based on user id
+    username = session['user_id']
+    user = User.query.filter_by(username=username).first()
+
+    # need "user_orders" to be the database pull for the users orders
+    # need "order_meal_ids" to be the list of meal ids for each order
+
+    return render_template('profile.html', user=user)
 
 
-@app.route("/profile/orders")
+@ app.route("/profile/orders")
 def profile_orders():
     return render_template('orders.html')
 
 
-@app.route("/profile/edit")
+@ app.route("/profile/edit")
 def profile_edit():
     return render_template('edit.html')
 
@@ -197,15 +205,24 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
-        # user = User.authenticate(form.username.data, form.password.data)
+        username = form.username.data
+        password = form.password.data
 
-        # if user:
-        #     session[CURR_USER_KEY] = user.id
-
-        flash("Welcome! You have logged in successfully.")
-        return redirect("/")
+        user = User.authenticate(username, password)
+        if user:
+            flash(f"Welcome back, {user.username}!", "success")
+            session['user_id'] = user.username
+            return redirect('/profile')
+        else:
+            form.username.errors = ['Invalid username or password.']
 
     return render_template('login.html', form=form)
+
+
+@ app.route('/logout')
+def logout_user():
+    session.pop('user_id')
+    return redirect('/')
 
 
 @ app.route('/register', methods=["GET", "POST"])
@@ -220,26 +237,27 @@ def signup():
     form = RegisterForm()
 
     if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+        first_name = form.first_name.data
+        last_name = form.last_name.data
+        email = form.email.data
+        address_street = form.address_street.data
+        address_city = form.address_city.data
+        address_state = form.address_state.data
+        address_zip = form.address_zip.data
+        subscribed = form.subscribed.data
+
+        new_user = User.register(
+            username, password, first_name, last_name, email, address_street, address_city, address_state, address_zip, subscribed)
+
+        db.session.add(new_user)
         try:
-            user = User.signup(
-                username=form.username.data,
-                password=form.password.data,
-                first_name=form.first_name.data,
-                last_name=form.last_name.data,
-                email=form.email.data,
-                subscribed=form.subscribed.data
-            )
-
-            order = Order()
             db.session.commit()
-
         except IntegrityError:
-            flash("Username already taken", 'danger')
-            return render_template('register.html', form=form)
+            form.username.errors.append('Username taken. Please pick another.')
+            return render_template("register.html", form=form)
+        flash("Your account is registered. Log in now!", "success")
+        return redirect('/login')
 
-        do_login(user)
-
-        return redirect("/")
-
-    else:
-        return render_template('register.html', form=form)
+    return render_template('register.html', form=form)

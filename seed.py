@@ -11,7 +11,10 @@ user = User(
     first_name="Austin",
     last_name="Dreosch",
     email="austindreosch@gmail.com",
-    subscribed=True
+    address_street="234 Westgate St.",
+    address_city="San Vicardo",
+    address_state="CA",
+    address_zip="84561"
 )
 
 # plans

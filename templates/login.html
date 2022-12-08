@@ -2,21 +2,30 @@
 <!--  -->
 {% block content %}
 <div class="menu-heading"><h1>Login</h1></div>
-
 <div class="login-form">
+  <div>
+    <p>
+      Enter your information below. To register an account,
+      <a href="/register">click here.</a>
+    </p>
+  </div>
+  <!--  -->
+
   <form method="POST">
-    {{ form.hidden_tag() }} {% for field in form if field.widget.inputtype !=
+    {{ form.hidden_tag() }} {% for field in form if field.widget.input_type !=
     'hidden' %}
     <p>
-      {{ field.label }} {{ field(class="form-control") }} {% for error in
+      {{ field.label }} {{ field(class_="form-control") }} {% for error in
       field.errors %}
-      <span>{{ error }}</span>
+      <span class="form-text text-danger">{{ error }}</span>
       {% endfor %}
     </p>
     {% endfor %}
 
-    <button type="submit">Register</button>
+    <button class="btn btn-success" type="submit">Login</button>
   </form>
+
+  <!--  -->
 </div>
 
 <!--  -->
