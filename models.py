@@ -76,6 +76,13 @@ class Order(db.Model):
         nullable=False,
         default=datetime.utcnow()
     )
+    billing_name = db.Column(db.Text, nullable=False)
+    billing_card = db.Column(db.Text, nullable=False)
+    billing_expiration = db.Column(db.Text, nullable=False)
+    billing_street = db.Column(db.Text, nullable=False)
+    billing_city = db.Column(db.Text, nullable=False)
+    billing_state = db.Column(db.Text, nullable=False)
+    billing_zip = db.Column(db.Text, nullable=False)
     meal_id1 = db.Column(db.Integer, nullable=False)
     meal_id2 = db.Column(db.Integer, nullable=False)
     meal_id3 = db.Column(db.Integer, nullable=False)

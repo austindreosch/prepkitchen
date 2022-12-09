@@ -1,6 +1,8 @@
 delete button for each cart item
 recipe button for each menu item (on menu and orders page)
 
+set up order model with credit card stuff, and auto fill address from user info
+
 /checkout
 /profile
 /profile/orders

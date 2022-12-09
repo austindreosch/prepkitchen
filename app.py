@@ -1,7 +1,7 @@
 from flask import Flask, render_template, session, request, redirect, flash
 import requests
 from models import connect_db, db, User, Plan
-from forms import LoginForm, RegisterForm
+from forms import LoginForm, RegisterForm, CheckoutForm
 from sqlalchemy.exc import IntegrityError
 import math
 # from flask_debugtoolbar import DebugToolbarExtension
@@ -162,7 +162,44 @@ def checkout():
     plan = Plan.query.filter_by(id=session['cart_plan_id']).first()
 
     tax = math.ceil(((plan.price - 0.01) * 0.0725) * 100) / 100
-    return render_template('checkout.html', plan=plan, tax=tax)
+    total = math.ceil((plan.price - 0.01 + tax) * 100) / 100
+
+    form = CheckoutForm()
+
+    session_cart = []
+    id_cart = []
+    response_cart = []
+
+    # SHOPPING CART API CALLS
+    if 'cart_array' in session:
+        # turn session string into a list of ids
+        session_cart = session['cart_array'].lstrip(
+            '["').rstrip('"]').split('","')
+        id_cart = [eval(i) for i in session_cart]
+
+        cart_length = len(id_cart)
+        session['cart_length'] = cart_length
+
+    for item_id in id_cart:
+        item_url = f"https://www.themealdb.com/api/json/v1/1/lookup.php?i={item_id}"
+
+        item_response = requests.get(item_url)
+        item_data = item_response.json()
+        item = item_data['meals']
+        response_cart.append(
+            {
+                "idMeal": eval(item[0]["idMeal"]),
+                "strMeal": item[0]["strMeal"].title(),
+                "strMealThumb": item[0]["strMealThumb"]
+            }
+        )
+
+    print(response_cart)
+
+    # DATABASE PULLS
+    plan = Plan.query.filter_by(id=session['cart_plan_id']).first()
+
+    return render_template('checkout.html', plan=plan, tax=tax, total=total, form=form, session_cart=session_cart, response_cart=response_cart)
 
 
 @ app.route("/recipe/<int:meal_id>")

@@ -1,11 +1,44 @@
 {% extends 'base.html' %}
 <!--  -->
 {% block content %}
-<div class="checkout-form"></div>
-<div class="checkout-info">
-  <p>Plan: {{plan.serving_count}} servings. {{plan.meal_count}} meals.</p>
-  <p>Price: {{plan.price - 0.01}}</p>
-  <p>Sales Tax: {{tax}}</p>
-</div>
+<section class="checkout-container">
+  <div class="checkout-main">
+    <div class="checkout-order">
+      {% for item in response_cart %}
+      <div class="cart-container">
+        <div class="cart-imgdiv">
+          <img class="cart-img" src="{{item.strMealThumb}}" alt="" />
+        </div>
+        <div class="cart-card">
+          <div class="cart-card-title"><p>{{item.strMeal}}</p></div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="checkout-form">
+      <p>Billing Info</p>
+      <form method="POST">
+        {{ form.hidden_tag() }} {% for field in form if field.widget.input_type
+        != 'hidden' %}
+        <p>
+          {{ field.label }} {{ field(class_="form-control") }} {% for error in
+          field.errors %}
+          <span class="form-text text-danger">{{ error }}</span>
+          {% endfor %}
+        </p>
+        {% endfor %}
+
+        <button class="btn btn-success" type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+  <div class="checkout-info">
+    <p>Plan: {{plan.serving_count}} servings. {{plan.meal_count}} meals.</p>
+    <p>Price: ${{plan.price - 0.01}}</p>
+    <p>Shipping & handling: $0.00</p>
+    <p>Sales Tax: ${{tax}}</p>
+    <p>Total: ${{total}}</p>
+  </div>
+</section>
 <!--  -->
 {% endblock %}

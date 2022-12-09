@@ -728,6 +728,38 @@ PROFILE PAGE
 
 
 /****************** 
+CHECKOUT
+*******************/
+.checkout-container {
+    width: 1000px;
+    height: 600px;
+    margin: 0 auto;
+    align-items: center;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 65% 35%;
+    gap: 5px;
+}
+.checkout-main {
+    height: 100%;
+    background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    border-radius: 5px;
+    display: grid;
+    grid-template-rows: 30% 70%;
+}
+.checkout-info {
+    height: 100%;
+    background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    border-radius: 5px;
+}
+.checkout-order {
+
+}
+
+
+/****************** 
 ADD BUTTON
 *******************/
 

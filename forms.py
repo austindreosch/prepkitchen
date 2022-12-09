@@ -28,3 +28,16 @@ class RegisterForm(FlaskForm):
 class LoginForm(FlaskForm):
     username = StringField("Username", validators=[InputRequired()])
     password = PasswordField("Password", validators=[InputRequired()])
+
+
+class CheckoutForm(FlaskForm):
+    billing_name = StringField("Name on card", validators=[InputRequired()])
+    billing_card = StringField("Card number", validators=[InputRequired()])
+    billing_expiration = StringField(
+        "Expiration date", validators=[InputRequired()])
+    billing_street = StringField(
+        "Billing Address", validators=[InputRequired()])
+    billing_city = StringField("City", validators=[InputRequired()])
+    billing_state = SelectField(
+        "State", choices=STATE_LIST)
+    billing_zip = StringField("ZIP", validators=[InputRequired()])
