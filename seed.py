@@ -41,20 +41,20 @@ plan3 = Plan(
 )
 
 # orders
-order1 = Order(
-    user_id=1,
-    plan_id=2,
-    meal_id1=52819,
-    meal_id2=52960,
-    meal_id3=52995,
-    meal_id4=52864,
-    meal_id5=53010
-)
+# order1 = Order(
+#     user_id=1,
+#     plan_id=2,
+#     meal_id1=52819,
+#     meal_id2=52960,
+#     meal_id3=52995,
+#     meal_id4=52864,
+#     meal_id5=53010
+# )
 
 
 db.session.add(user)
 db.session.add(plan1)
 db.session.add(plan2)
 db.session.add(plan3)
-db.session.add(order1)
+# db.session.add(order1)
 db.session.commit()

@@ -33,8 +33,8 @@ class LoginForm(FlaskForm):
 class CheckoutForm(FlaskForm):
     billing_name = StringField("Name on card", validators=[InputRequired()])
     billing_card = StringField("Card number", validators=[InputRequired()])
-    billing_expiration = StringField(
-        "Expiration date", validators=[InputRequired()])
+    billing_code = StringField(
+        "Security code", validators=[InputRequired()])
     billing_street = StringField(
         "Billing Address", validators=[InputRequired()])
     billing_city = StringField("City", validators=[InputRequired()])

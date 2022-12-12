@@ -7,28 +7,28 @@
   <div class="profile-orders-container">
     <div class="profile-orders-title">
       <p>Your Orders</p>
-      {{user.orders}}
+      {% for order in user_orders %}
+      <div>{{order[0]}}</div>
+      {% endfor %}
     </div>
     <div class="profile-orders">
       {% for order in user_orders %}<!-- for each order -->
       <div class="profile-order">
-        {% for meal in order_meal_ids %}<!-- for each meal in order -->
+        {% for meal in all_orders %}<!-- for each meal in order -->
         <div class="profile-order-meal">
           <div class="profile-order-meal-imgdiv">
-            <img
-              src="https://www.themealdb.com/images/media/meals/atd5sh1583188467.jpg"
-              alt=""
-            />
+            <img src="{{meal.strMealThumb}}" alt="" />
           </div>
           <div class="profile-order-meal-card">
             <div class="profile-order-meal-card-title">
-              <p>Meal Title</p>
+              <p>{{meal.strMeal}}</p>
             </div>
           </div>
         </div>
         {% endfor %}<!-- end of meals loop -->
         <div class="profile-order-meal-info">
           <p>Date</p>
+          <p>Order ID</p>
           <p>Plan</p>
           <p>Order Again</p>
         </div>
@@ -54,4 +54,12 @@
 </div>
 
 <!--  -->
-{% endblock %}
+{% endblock %} [ [{'idMeal': 53036, 'strMeal': 'Boxty Breakfast',
+'strMealThumb':
+'https://www.themealdb.com/images/media/meals/naqyel1608588563.jpg'}],
+[{'idMeal': 52895, 'strMeal': 'English Breakfast', 'strMealThumb':
+'https://www.themealdb.com/images/media/meals/utxryw1511721587.jpg'}],
+[{'idMeal': 53041, 'strMeal': 'Grilled Portuguese Sardines', 'strMealThumb':
+'https://www.themealdb.com/images/media/meals/lpd4wy1614347943.jpg'}],
+[{'idMeal': 53021, 'strMeal': 'Gołąbki (Cabbage Roll)', 'strMealThumb':
+'https://www.themealdb.com/images/media/meals/q8sp3j1593349686.jpg'}] ]

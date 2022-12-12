@@ -57,7 +57,7 @@ class Plan(db.Model):
     __tablename__ = 'plans'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    price = db.Column(db.Integer, nullable=False)
+    price = db.Column(db.Float, nullable=False)
     serving_count = db.Column(db.Integer, nullable=False)
     meal_count = db.Column(db.Integer, nullable=False)
     image_url = db.Column(db.Text, nullable=False)
@@ -78,11 +78,16 @@ class Order(db.Model):
     )
     billing_name = db.Column(db.Text, nullable=False)
     billing_card = db.Column(db.Text, nullable=False)
-    billing_expiration = db.Column(db.Text, nullable=False)
+    billing_code = db.Column(db.Text, nullable=False)
     billing_street = db.Column(db.Text, nullable=False)
     billing_city = db.Column(db.Text, nullable=False)
     billing_state = db.Column(db.Text, nullable=False)
     billing_zip = db.Column(db.Text, nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    tax = db.Column(db.Float, nullable=False)
+    total = db.Column(db.Float, nullable=False)
+    meal_id3 = db.Column(db.Integer, nullable=False)
+    meal_id3 = db.Column(db.Integer, nullable=False)
     meal_id1 = db.Column(db.Integer, nullable=False)
     meal_id2 = db.Column(db.Integer, nullable=False)
     meal_id3 = db.Column(db.Integer, nullable=False)
@@ -93,7 +98,6 @@ class Order(db.Model):
 # class Cart(db.Model):
 #     """Shopping cart model."""
 #     __tablename__ = 'carts'
-5150
 
 #     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 #     username = db.Column(db.Text, nullable=False, unique=True)

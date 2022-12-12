@@ -3,6 +3,9 @@ recipe button for each menu item (on menu and orders page)
 
 set up order model with credit card stuff, and auto fill address from user info
 
+on choosing conflicting plan, cart session array gets deleted, but not the localstorage
+localStorage.removeItem("cart_array");
+
 /checkout
 /profile
 /profile/orders

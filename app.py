@@ -1,6 +1,6 @@
 from flask import Flask, render_template, session, request, redirect, flash
 import requests
-from models import connect_db, db, User, Plan
+from models import connect_db, db, User, Plan, Order
 from forms import LoginForm, RegisterForm, CheckoutForm
 from sqlalchemy.exc import IntegrityError
 import math
@@ -44,6 +44,21 @@ def choose_plan(plan_id):
 
     plan = Plan.query.filter_by(id=plan_id).first()
     session['meal _cap'] = plan.meal_count
+
+    session_cart = []
+    id_cart = []
+    cart_length = 0
+
+    if 'cart_array' in session:
+        # turn session string into a list of ids
+        session_cart = session['cart_array'].lstrip(
+            '["').rstrip('"]').split('","')
+        id_cart = [eval(i) for i in session_cart]
+        cart_length = len(id_cart)
+        # reset cart if too many items for new plan
+        if plan.meal_count < cart_length:
+            del session['cart_array']
+            session['cart_length'] = 0
 
     return redirect('/choose/pork')
 
@@ -156,20 +171,19 @@ def cart_clear():
     return redirect(request.referrer)
 
 
-@ app.route("/checkout")
+@ app.route("/checkout", methods=["GET", "POST"])
 def checkout():
     """Deal with checkout, and database saving."""
+    username = session['user_id']
+    user = User.query.filter_by(username=username).first()
     plan = Plan.query.filter_by(id=session['cart_plan_id']).first()
-
-    tax = math.ceil(((plan.price - 0.01) * 0.0725) * 100) / 100
-    total = math.ceil((plan.price - 0.01 + tax) * 100) / 100
-
     form = CheckoutForm()
+    tax = math.ceil((plan.price * 0.0725) * 100) / 100
+    total = math.ceil((plan.price + tax) * 100) / 100
 
     session_cart = []
     id_cart = []
     response_cart = []
-
     # SHOPPING CART API CALLS
     if 'cart_array' in session:
         # turn session string into a list of ids
@@ -194,10 +208,39 @@ def checkout():
             }
         )
 
-    print(response_cart)
+    if form.validate_on_submit():
+        billing_name = form.billing_name.data
+        billing_card = form.billing_card.data
+        billing_code = form.billing_code.data
+        billing_street = form.billing_street.data
+        billing_city = form.billing_city.data
+        billing_state = form.billing_state.data
+        billing_zip = form.billing_zip.data
 
-    # DATABASE PULLS
-    plan = Plan.query.filter_by(id=session['cart_plan_id']).first()
+        meal_id1 = id_cart[0]
+        meal_id2 = id_cart[1]
+        meal_id3 = id_cart[2]
+        if len(id_cart) > 3:
+            meal_id4 = id_cart[3]
+            order = Order(user_id=user.id,
+                          plan_id=plan.id,
+                          billing_name=billing_name,
+                          billing_card=billing_card,
+                          billing_code=billing_code,
+                          billing_street=billing_street, billing_city=billing_city, billing_state=billing_state, billing_zip=billing_zip, price=plan.price, tax=tax, total=total, meal_id1=meal_id1, meal_id2=meal_id2, meal_id3=meal_id3, meal_id4=meal_id4)
+            db.session.add(order)
+            db.session.commit()
+        if len(id_cart) > 4:
+            meal_id5 = id_cart[4]
+            order = Order(user_id=user.id, plan_id=plan.id,
+                          billing_name=billing_name,
+                          billing_card=billing_card,
+                          billing_code=billing_code,
+                          billing_street=billing_street, billing_city=billing_city, billing_state=billing_state, billing_zip=billing_zip, price=plan.price, tax=tax, total=total, meal_id1=meal_id1, meal_id2=meal_id2, meal_id3=meal_id3, meal_id4=meal_id4, meal_id5=meal_id5)
+            db.session.add(order)
+            db.session.commit()
+
+        return redirect("/profile")
 
     return render_template('checkout.html', plan=plan, tax=tax, total=total, form=form, session_cart=session_cart, response_cart=response_cart)
 
@@ -224,11 +267,33 @@ def profile():
     # need "user_orders" to be the database pull for the users orders
     # need "order_meal_ids" to be the list of meal ids for each order
 
-    return render_template('profile.html', user=user)
+    user_orders = Order.query.filter_by(user_id=user.id).all()
+
+    id_cart = [53036, 52895, 53041, 53021]
+    all_orders = []
+
+    for item_id in id_cart:
+        order_list = []
+        item_url = f"https://www.themealdb.com/api/json/v1/1/lookup.php?i={item_id}"
+
+        item_response = requests.get(item_url)
+        item_data = item_response.json()
+        item = item_data['meals']
+        order_list.append(
+            {
+                "idMeal": eval(item[0]["idMeal"]),
+                "strMeal": item[0]["strMeal"].title(),
+                "strMealThumb": item[0]["strMealThumb"]
+            }
+        )
+        all_orders.append(order_list)
+
+    return render_template('profile.html', user=user, user_orders=user_orders, all_orders=all_orders)
 
 
 @ app.route("/profile/orders")
 def profile_orders():
+    """Extended page for all orders. Perhaps unnecessary."""
     return render_template('orders.html')
 
 

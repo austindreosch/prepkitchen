@@ -7,7 +7,7 @@
   <div class="plans">
     {% for plan in plans %}
     <div class="plan">
-      <h2 class="plan-bigtext">${{plan.price - 0.01}}<small>/mo</small></h2>
+      <h2 class="plan-bigtext">${{plan.price}}<small>/mo</small></h2>
       <hr />
       <p>{{plan.serving_count}} servings per meal.</p>
       <p>{{plan.meal_count}} meals per week.</p>
