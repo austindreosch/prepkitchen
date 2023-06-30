@@ -2,9 +2,10 @@ from flask import Flask, render_template, session, request, redirect, flash
 import requests
 from models import connect_db, db, User, Plan, Order
 from forms import LoginForm, RegisterForm, CheckoutForm
-from sqlalchemy.exc import IntegrityError
+# from sqlalchemy.exc import IntegrityError
 import math
 # from flask_debugtoolbar import DebugToolbarExtension
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///prepkitchen'
@@ -220,6 +221,7 @@ def checkout():
         meal_id1 = id_cart[0]
         meal_id2 = id_cart[1]
         meal_id3 = id_cart[2]
+
         if len(id_cart) > 3:
             meal_id4 = id_cart[3]
             order = Order(user_id=user.id,
@@ -229,16 +231,12 @@ def checkout():
                           billing_code=billing_code,
                           billing_street=billing_street, billing_city=billing_city, billing_state=billing_state, billing_zip=billing_zip, price=plan.price, tax=tax, total=total, meal_id1=meal_id1, meal_id2=meal_id2, meal_id3=meal_id3, meal_id4=meal_id4)
             db.session.add(order)
-            db.session.commit()
+
         if len(id_cart) > 4:
             meal_id5 = id_cart[4]
-            order = Order(user_id=user.id, plan_id=plan.id,
-                          billing_name=billing_name,
-                          billing_card=billing_card,
-                          billing_code=billing_code,
-                          billing_street=billing_street, billing_city=billing_city, billing_state=billing_state, billing_zip=billing_zip, price=plan.price, tax=tax, total=total, meal_id1=meal_id1, meal_id2=meal_id2, meal_id3=meal_id3, meal_id4=meal_id4, meal_id5=meal_id5)
-            db.session.add(order)
-            db.session.commit()
+            order.meal_id5 = meal_id5
+
+        db.session.commit()
 
         return redirect("/profile")
 
@@ -255,38 +253,53 @@ def profile_show_meal(meal_id):
 # USERS
 # ####################
 
-@ app.route("/profile")
+@app.route("/profile")
 def profile():
     """Shows account information for a given user. Along with past orders, and links to recipes/ingredients."""
-    # session['user_id'] = "adreosch1"
-    # look up user id based on username
-    # look up orders based on user id
     username = session['user_id']
     user = User.query.filter_by(username=username).first()
 
-    # need "user_orders" to be the database pull for the users orders
-    # need "order_meal_ids" to be the list of meal ids for each order
+    user_orders = user.orders
 
-    user_orders = Order.query.filter_by(user_id=user.id).all()
-
-    id_cart = [53036, 52895, 53041, 53021]
     all_orders = []
 
-    for item_id in id_cart:
+    for order in user_orders:
         order_list = []
-        item_url = f"https://www.themealdb.com/api/json/v1/1/lookup.php?i={item_id}"
+        order_meal_ids = [order.meal_id1, order.meal_id2,
+                          order.meal_id3, order.meal_id4, order.meal_id5]
 
-        item_response = requests.get(item_url)
-        item_data = item_response.json()
-        item = item_data['meals']
-        order_list.append(
-            {
-                "idMeal": eval(item[0]["idMeal"]),
-                "strMeal": item[0]["strMeal"].title(),
-                "strMealThumb": item[0]["strMealThumb"]
-            }
-        )
+        for item_id in order_meal_ids:
+            item_url = f"https://www.themealdb.com/api/json/v1/1/lookup.php?i={item_id}"
+            item_response = requests.get(item_url)
+            item_data = item_response.json()
+            item = item_data['meals']
+
+            if item:
+                order_list.append(
+                    {
+                        "idMeal": eval(item[0]["idMeal"]),
+                        "strMeal": item[0]["strMeal"].title(),
+                        "strMealThumb": item[0]["strMealThumb"],
+                        "date": order.date,
+                        "order_id": order.id
+                    }
+                )
+            else:
+                # Handle the case when the item is not found or the API response is invalid
+                order_list.append(
+                    {
+                        "idMeal": None,
+                        "strMeal": "",
+                        "strMealThumb": "",
+                        "date": "",
+                        "order_id": None
+                    }
+                )
         all_orders.append(order_list)
+
+    for order_list in all_orders:
+        print("order_list")
+        print(order_list)
 
     return render_template('profile.html', user=user, user_orders=user_orders, all_orders=all_orders)
 

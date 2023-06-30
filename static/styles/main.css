@@ -654,20 +654,11 @@ PROFILE PAGE
     gap: 5px;
 
 }
-.profile-orders-container {
-    /* border: 1px solid black; */
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-rows: 10% 90%;
-    background-color: white;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-    border-radius: 5px;
 
-}
 .profile-orders-title {
     font-size: 2.4rem;
     padding: 5px 0;
+    margin-top: 15px;
 }
 .profile-orders {
     display: grid;
@@ -679,7 +670,7 @@ PROFILE PAGE
 .profile-order {
     width: 100%;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 
@@ -712,15 +703,6 @@ PROFILE PAGE
 
 /* ////////////////// */
 
-.profile-info-container {
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-    border-radius: 5px;
-    display: grid;
-    grid-template-rows: 30% 30% 40%;
-}
 
 
 /****************** 
@@ -868,3 +850,146 @@ ADD BUTTON
         margin: auto;
 
    }
+
+
+
+   /* //////////////////////////////////////////// */
+
+   /* CSS for the container div */
+/* CSS for the profile orders section */
+/* CSS for the profile orders section */
+
+.profile-orders-container {
+    /* border: 1px solid black; */
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 10% 90%;
+    background-color: #96c38c5b;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    border-radius: 5px;
+
+}
+
+.profile-info-container {
+    width: 100%;
+    height: 100%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    border-radius: 5px;
+    display: grid;
+    grid-template-rows: 13% 20% 67%;
+    background-color: #c3ad8c5b;
+
+}
+
+.profile-info-stats {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.profile-info-startnew {
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: center;
+    margin-bottom: 200px;
+}
+
+.profile-orders {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Update the justify-content property */
+  }
+  
+  
+  .profile-order { 
+    width: 100%;
+    margin-bottom: 20px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff1e3;
+    border-radius: 5px;
+  }
+  
+  .profile-meal {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center the meal div content vertically */
+    text-align: center;
+    padding: 10px;
+    margin-right: 10px;
+  }
+  
+  .profile-order-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    margin-right: 10px;
+  }
+  
+  .profile-order-details .profile-meal-text {
+    margin-top: 5px;
+    text-align: right; /* Align the meal text to the right */
+    font-size: 12px;
+  }
+  
+  .profile-order-details .profile-meal-details {
+    margin-top: auto;
+    text-align: right;
+    font-size: 10px;
+  }
+  
+  
+  .profile-order-info {
+    width: 20%;
+    margin: 10px;
+    padding: 20px;
+    height: 85px;
+    background-color: #ffb375;
+    border-radius: 5%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .profile-order-info div {
+    margin-bottom: 10px; /* Adjust the margin value as per your preference */
+  }
+
+  
+  /* CSS for the meal image */
+  .profile-meal-img {
+    width: 85px;
+    height: 85px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  }
+  
+  /* CSS for the meal text */
+  .profile-meal-text {
+    width: 100%; 
+    /* overflow: hidden; */
+    text-overflow: ellipsis;
+  }
+  
+  /* CSS for the meal details */
+  .profile-meal .profile-meal-details {
+    margin-top: auto;
+    text-align: right;
+    font-size: 10px;
+  }
+  
+  img[src=""] {
+  display: none;
+}
+
+
+
+

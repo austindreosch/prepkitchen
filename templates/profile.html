@@ -6,60 +6,50 @@
 <div class="profile-container">
   <div class="profile-orders-container">
     <div class="profile-orders-title">
-      <p>Your Orders</p>
-      {% for order in user_orders %}
-      <div>{{order[0]}}</div>
-      {% endfor %}
+      <p>Your Recent Orders</p>
     </div>
+
     <div class="profile-orders">
-      {% for order in user_orders %}<!-- for each order -->
+      {% for order_list in all_orders %}
       <div class="profile-order">
-        {% for meal in all_orders %}<!-- for each meal in order -->
-        <div class="profile-order-meal">
-          <div class="profile-order-meal-imgdiv">
-            <img src="{{meal.strMealThumb}}" alt="" />
-          </div>
-          <div class="profile-order-meal-card">
-            <div class="profile-order-meal-card-title">
-              <p>{{meal.strMeal}}</p>
-            </div>
-          </div>
+        <div class="profile-order-info">
+          <div>Order # {{order_list.0.order_id}}</div>
+          <div>{{ order_list.0.date.strftime('%Y-%m-%d %H:%M') }}</div>
         </div>
-        {% endfor %}<!-- end of meals loop -->
-        <div class="profile-order-meal-info">
-          <p>Date</p>
-          <p>Order ID</p>
-          <p>Plan</p>
-          <p>Order Again</p>
+
+        {% for meal in order_list %}
+        <div class="profile-meal">
+          <img
+            class="profile-meal-img"
+            src="{{ meal.strMealThumb }}"
+            alt="{{ meal.strMeal }}"
+          />
         </div>
+        {% endfor %}
       </div>
-      {% endfor %}<!-- end of orders loop -->
+      {% endfor %}
     </div>
   </div>
 
   <div class="profile-info-container">
-    <div>
-      <p>Your Info</p>
-      <p>{{user.first_name}} {{user.last_name}}</p>
+    <p class="profile-orders-title">Your Info</p>
+    <div class="profile-info-stats">
+      <strong><p>{{user.first_name}} {{user.last_name}}</p></strong>
       <p>{{user.email}}</p>
       <p>Address</p>
       <p>{{user.address_street}}</p>
       <p>{{user.address_city}}, {{user.address_state}} {{user.address_zip}}</p>
     </div>
-    <div><p>Edit Profile</p></div>
-    <div>
-      <p><a href="/plans">Start New Order</a></p>
+    <div class="profile-info-startnew">
+      <button>
+        <p><a href="/plans">Start New Order</a></p>
+      </button>
+      <button>
+        <p><a href="/logout">Logout</a></p>
+      </button>
     </div>
   </div>
 </div>
 
 <!--  -->
-{% endblock %} [ [{'idMeal': 53036, 'strMeal': 'Boxty Breakfast',
-'strMealThumb':
-'https://www.themealdb.com/images/media/meals/naqyel1608588563.jpg'}],
-[{'idMeal': 52895, 'strMeal': 'English Breakfast', 'strMealThumb':
-'https://www.themealdb.com/images/media/meals/utxryw1511721587.jpg'}],
-[{'idMeal': 53041, 'strMeal': 'Grilled Portuguese Sardines', 'strMealThumb':
-'https://www.themealdb.com/images/media/meals/lpd4wy1614347943.jpg'}],
-[{'idMeal': 53021, 'strMeal': 'Gołąbki (Cabbage Roll)', 'strMealThumb':
-'https://www.themealdb.com/images/media/meals/q8sp3j1593349686.jpg'}] ]
+{% endblock %}

@@ -29,7 +29,7 @@ class User(db.Model):
     address_city = db.Column(db.Text, nullable=False)
     address_state = db.Column(db.Text, nullable=False)
     address_zip = db.Column(db.Text, nullable=False)
-    subscribed = db.Column(db.Boolean, default=False)
+    # subscribed = db.Column(db.Boolean, default=False)
     orders = db.relationship('Order', backref='users')
 
     @classmethod
@@ -86,19 +86,9 @@ class Order(db.Model):
     price = db.Column(db.Float, nullable=False)
     tax = db.Column(db.Float, nullable=False)
     total = db.Column(db.Float, nullable=False)
-    meal_id3 = db.Column(db.Integer, nullable=False)
-    meal_id3 = db.Column(db.Integer, nullable=False)
     meal_id1 = db.Column(db.Integer, nullable=False)
     meal_id2 = db.Column(db.Integer, nullable=False)
     meal_id3 = db.Column(db.Integer, nullable=False)
     meal_id4 = db.Column(db.Integer)
     meal_id5 = db.Column(db.Integer)
 
-
-# class Cart(db.Model):
-#     """Shopping cart model."""
-#     __tablename__ = 'carts'
-
-#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-#     username = db.Column(db.Text, nullable=False, unique=True)
-#     password = db.Column(db.Text, nullable=False)
