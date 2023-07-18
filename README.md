@@ -24,45 +24,32 @@ You will need to have the following installed on your machine:
 
 - Python 3.10.6
 - PostgreSQL
-- Node.js and npm
 
 ### Installation
 
 1. Clone this repository:
 
-\`\`\`sh
 git clone https://github.com/austindreosch/prepkitchen/
-\`\`\`
 
 2. Navigate to the project directory:
 
-\`\`\`sh
 cd prepkitchen
-\`\`\`
 
 3. Install Python dependencies:
 
-\`\`\`sh
 pip install -r requirements.txt
-\`\`\`
 
 4. Set up the PostgreSQL database:
 
-\`\`\`sh
 createdb prepkitchen
-\`\`\`
 
 5. Populate the database with data:
 
-\`\`\`sh
 python seed.py
-\`\`\`
 
 6. Start the Flask server:
 
-\`\`\`sh
 flask run
-\`\`\`
 
 Now the server should be running at `localhost:5000`.
 
