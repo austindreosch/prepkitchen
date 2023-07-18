@@ -5,6 +5,7 @@ from forms import LoginForm, RegisterForm, CheckoutForm
 # from sqlalchemy.exc import IntegrityError
 import math
 # from flask_debugtoolbar import DebugToolbarExtension
+from collections.abc import Mapping
 
 
 app = Flask(__name__)
