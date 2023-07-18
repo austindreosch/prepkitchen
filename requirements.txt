@@ -7,7 +7,7 @@ cffi==1.14.3
 charset-normalizer==3.2.0
 Click==7.0
 decorator==4.3.0
-Flask==1.0.2
+Flask>=1.1.2
 Flask-Bcrypt==1.0.1
 Flask-DebugToolbar==0.10.1
 Flask-SQLAlchemy==2.4.4
