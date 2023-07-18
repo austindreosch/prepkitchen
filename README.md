@@ -61,12 +61,4 @@ To make use of the application's features, follow these steps:
 2. Register a new account or login if you already have one
 3. Browse the meal options and select the ones you want to add to your meal plan
 4. Add them to your shopping cart
-5. Checkout and you will receive a summary of your order
-
-## Future Development
-
-The journey doesn't stop here. Directly after this project, I begin work on the second half of the program, shifting the focus towards full-stack development with JavaScript using tools like React, Express, and Redux.
-
-## License
-
-This project is licensed under the MIT License - see the `LICENSE` file for details.
+5. Checkout and you will receive a summary of your orders in your profile page.
