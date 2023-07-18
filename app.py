@@ -265,10 +265,10 @@ def checkout():
     return render_template('checkout.html', user=user, plan=plan, tax=tax, total=total, form=form, session_cart=session_cart, response_cart=response_cart)
 
 
-@ app.route("/recipe/<int:meal_id>")
-def profile_show_meal(meal_id):
-    """Show recipe and ingredients for a given meal."""
-    return render_template('recipe.html')
+# @ app.route("/recipe/<int:meal_id>")
+# def profile_show_meal(meal_id):
+#     """Show recipe and ingredients for a given meal."""
+#     return render_template('recipe.html')
 
 
 # ####################
@@ -325,16 +325,6 @@ def profile():
 
     return render_template('profile.html', user=user, user_orders=user_orders, all_orders=all_orders)
 
-
-@ app.route("/profile/orders")
-def profile_orders():
-    """Extended page for all orders. Perhaps unnecessary."""
-    return render_template('orders.html')
-
-
-@ app.route("/profile/edit")
-def profile_edit():
-    return render_template('edit.html')
 
 
 @ app.route('/login', methods=["GET", "POST"])
