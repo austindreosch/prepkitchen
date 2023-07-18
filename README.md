@@ -22,7 +22,7 @@ Here is a guide on how to get this app up and running on your local machine.
 
 You will need to have the following installed on your machine:
 
-- Python 3.x
+- Python 3.10.6
 - PostgreSQL
 - Node.js and npm
 
@@ -30,5 +30,56 @@ You will need to have the following installed on your machine:
 
 1. Clone this repository:
 
-```sh
-git clone <repo-url>
+\`\`\`sh
+git clone https://github.com/austindreosch/prepkitchen/
+\`\`\`
+
+2. Navigate to the project directory:
+
+\`\`\`sh
+cd prepkitchen
+\`\`\`
+
+3. Install Python dependencies:
+
+\`\`\`sh
+pip install -r requirements.txt
+\`\`\`
+
+4. Set up the PostgreSQL database:
+
+\`\`\`sh
+createdb prepkitchen
+\`\`\`
+
+5. Populate the database with data:
+
+\`\`\`sh
+python seed.py
+\`\`\`
+
+6. Start the Flask server:
+
+\`\`\`sh
+flask run
+\`\`\`
+
+Now the server should be running at `localhost:5000`.
+
+### Usage
+
+To make use of the application's features, follow these steps:
+
+1. Go to `localhost:5000` on your web browser
+2. Register a new account or login if you already have one
+3. Browse the meal options and select the ones you want to add to your meal plan
+4. Add them to your shopping cart
+5. Checkout and you will receive a summary of your order
+
+## Future Development
+
+The journey doesn't stop here. Directly after this project, I begin work on the second half of the program, shifting the focus towards full-stack development with JavaScript using tools like React, Express, and Redux.
+
+## License
+
+This project is licensed under the MIT License - see the `LICENSE` file for details.
