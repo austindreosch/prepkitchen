@@ -34,20 +34,20 @@
           src="https://i.postimg.cc/vYs002LQ/logo-long2.png"
           alt=""
       /></a>
-      <p>Plan: {{session_plan_id}}</p>
+      <!-- <p>Plan: {{session_plan_id}}</p>
       <p>Cap: {{session_meal_cap}}</p>
       <p>Length: {{session['cart_length']}}</p>
-      <p>Cart: {{session_cart}}</p>
+      <p>Cart: {{session_cart}}</p> -->
       <!-- <p>User: {{session['user_id']}}</p> -->
       <nav class="main-nav">
         <ul class="main-nav-list">
           <li>
             <a class="main-nav-link" href="/menu/miscellaneous">Our Menu</a>
           </li>
-          <!-- <li>
-            <a class="main-nav-link" href="/plans">Our Plans</a>
-          </li> -->
           {% if session['user_id'] %}
+          <li>
+            <a class="main-nav-link nav-order" href="/plans">Start New Order</a>
+          </li>
           <li>
             <a class="main-nav-link nav-cta" href="/profile"
               >{{session['user_id']}}</a

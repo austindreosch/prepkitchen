@@ -29,6 +29,12 @@ def index():
 
     return render_template("index.html")
 
+@app.route("/abouttheproject")
+def about():
+    """Home page."""
+
+    return render_template("about.html")
+
 
 @app.route('/plans')
 def show_plans():
@@ -175,6 +181,10 @@ def cart_clear():
 @ app.route("/checkout", methods=["GET", "POST"])
 def checkout():
     """Deal with checkout, and database saving."""
+    if 'user_id' not in session:
+        flash('Please log in first.')
+        return redirect('/login')
+    
     username = session['user_id']
     user = User.query.filter_by(username=username).first()
     plan = Plan.query.filter_by(id=session['cart_plan_id']).first()
@@ -240,7 +250,7 @@ def checkout():
 
         return redirect("/profile")
 
-    return render_template('checkout.html', plan=plan, tax=tax, total=total, form=form, session_cart=session_cart, response_cart=response_cart)
+    return render_template('checkout.html', user=user,plan=plan, tax=tax, total=total, form=form, session_cart=session_cart, response_cart=response_cart)
 
 
 @ app.route("/recipe/<int:meal_id>")
@@ -361,10 +371,9 @@ def signup():
         address_city = form.address_city.data
         address_state = form.address_state.data
         address_zip = form.address_zip.data
-        subscribed = form.subscribed.data
 
         new_user = User.register(
-            username, password, first_name, last_name, email, address_street, address_city, address_state, address_zip, subscribed)
+            username, password, first_name, last_name, email, address_street, address_city, address_state, address_zip)
 
         db.session.add(new_user)
         try:

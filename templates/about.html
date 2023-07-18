@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+<!--  -->
+{% block content %}
+<section class="section-hero">
+  <div class="hero">
+    <div class="hero-text-box">
+      <a href="/" class="btn btn--outline right-side">Go back.</a>
+      <h1 class="heading-primary top-margin">
+        A little bit more about this project, for those interested.
+      </h1>
+      <p class="hero-description top-margin">
+        Welcome to my first capstone project — this application represents the
+        culmination of my educational journey at the half-way point of
+        Springboard's software engineering program, where I have applied the
+        concepts and techniques learned throughout the course of the program.
+        This includes the basics of web development taught through
+        <strong>HTML</strong>, <strong>CSS</strong>, and
+        <strong>Javascript</strong> but the project focuses most heavily on
+        broadly demonstrating <strong>Python</strong> development and the suite
+        of tools that we've learned alongside it.
+      </p>
+      <p class="hero-description closer-top">
+        It is a full-stack application combining most tools I have at my
+        disposal to this point. The most notable of those being the use of
+        Python, the <strong>Flask</strong> backend framework,
+        <strong>PostgreSQL</strong> as the database management system, and
+        <strong>SQLAlchemy</strong> for ORM modeling. I use the Jinja templating
+        engine in Flask to inject data passed from my server-side route points
+        into dynamic HTML templates, and make use of
+        <strong>TheMealDB API</strong> to externally fetch meal data for the
+        service.
+      </p>
+      <p class="hero-description closer-top">
+        The website design is also made with all custom CSS, and makes use of
+        JavaScript and <strong>jQuery</strong> for some front-end functionality,
+        such as the meal-plan builder shopping cart system - which sends
+        client-side data to an API point on the Flask server to synchronize the
+        local storage cache data with the user's session data, and updates the
+        displayed shopping cart automatically. I was particularly proud of this
+        implementation - as it was my first real application instance of
+        independently tackling the complex conceptual challenge around how to
+        use JavaScript front-end code in conjunction with a Python back-end by
+        using event triggers that send data back into the server to be stored
+        and processed for dynamically updating the page.
+      </p>
+      <p class="hero-description closer-top">
+        Directly after this project, I begin work on the second half of the
+        program, which marks the end of our time with Python and refocuses on
+        full-stack development with JavaScript using
+        <strong>Node.js</strong> with tools like <strong>React</strong>,
+        <strong>Express</strong>, and <strong>Redux</strong>.
+      </p>
+      <p class="hero-description">- Austin Dreosch</p>
+    </div>
+    <div class="hero-img-box">
+      <img src="https://i.postimg.cc/QXLmMYzp/hero2.png" class="hero-img" />
+    </div>
+  </div>
+</section>
+<!--  -->
+{% endblock %}

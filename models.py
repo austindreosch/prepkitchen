@@ -29,17 +29,16 @@ class User(db.Model):
     address_city = db.Column(db.Text, nullable=False)
     address_state = db.Column(db.Text, nullable=False)
     address_zip = db.Column(db.Text, nullable=False)
-    # subscribed = db.Column(db.Boolean, default=False)
     orders = db.relationship('Order', backref='users')
 
     @classmethod
-    def register(cls, username, pwd, first_name, last_name, email, address_street, address_city, address_state, address_zip, subscribed):
+    def register(cls, username, pwd, first_name, last_name, email, address_street, address_city, address_state, address_zip):
 
         hashed = bcrypt.generate_password_hash(pwd)
 
         hash_str = hashed.decode("utf8")
 
-        return cls(username=username, password=hash_str, first_name=first_name, last_name=last_name, email=email, address_street=address_street, address_city=address_city, address_state=address_state, address_zip=address_zip, subscribed=subscribed)
+        return cls(username=username, password=hash_str, first_name=first_name, last_name=last_name, email=email, address_street=address_street, address_city=address_city, address_state=address_state, address_zip=address_zip)
 
     @classmethod
     def authenticate(cls, username, pwd):

@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+
+
 /* 
 
 --- 01 TYPOGRAPHY SYSTEM
@@ -73,14 +78,17 @@ GENERAL/REUSABLE COMPONENTS
 
 .btn--full:link,
 .btn--full:visited {
-    background-color: #fa9746;
+    background-color: #ffb375;
     color: #fff;
 
 }
 
 .btn--full:hover,
 .btn--full:active {
-    background-color: #e1883f;
+    /* background-color: #e1883f; */
+    background: linear-gradient(90deg, #feb47b 0%, #ff8e72 100%);
+    box-shadow: 0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 10px 10px -5px rgba(0, 0, 0, 0.04);
+
 }
 
 .btn--outline:link,
@@ -98,6 +106,7 @@ GENERAL/REUSABLE COMPONENTS
 
     /* border: 3px solid white; */
     box-shadow: inset 0 0 0 3px #96c38c;
+    
 }
 
 .btn--full-green:link,
@@ -172,7 +181,7 @@ NAVIGATION
     padding: 1.2rem 2.4rem;
     border-radius: 8px;
     color: #fff;
-    background-color: #2a4f96;
+    background-color: #4672c5;
 }
 
 .nav-cta:hover,
@@ -180,9 +189,29 @@ NAVIGATION
     padding: 1.2rem 2.4rem;
     border-radius: 8px;
     color: #fff;
-    background-color: #254581;
+    background: linear-gradient(90deg, #4672c5 0%, #1f3d7a 100%);
+    box-shadow: 0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+
+.nav-order:link,
+.nav-order:visited {
+    padding: 1.2rem 2.4rem;
+    border-radius: 8px;
+    color: #fff;
+    background-color: #ffb375;
+}
+
+.nav-order:hover,
+.nav-order:active {
+    padding: 1.2rem 2.4rem;
+    border-radius: 8px;
+    color: #fff;
+    background: linear-gradient(90deg, #feb47b 0%, #ff8e72 100%);
+    box-shadow: 0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 10px 10px -5px rgba(0, 0, 0, 0.04);
 
 }
+
 
 .nav-logout img{
     width: 25px;
@@ -201,7 +230,7 @@ FRONT HERO SECTION
 .hero {
 
     margin: 0 auto;
-    max-width: 130rem;
+    max-width: 150rem;
     padding: 0 3.2rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -710,7 +739,7 @@ CHECKOUT
 *******************/
 .checkout-container {
     width: 1000px;
-    height: 600px;
+    height: 700px;
     margin: 0 auto;
     align-items: center;
     text-align: center;
@@ -720,15 +749,15 @@ CHECKOUT
 }
 .checkout-main {
     height: 100%;
-    background-color: white;
+    background-color: #96c38c5b;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     border-radius: 5px;
     display: grid;
-    grid-template-rows: 30% 70%;
+    grid-template-rows: 25% 66% 8%;
 }
 .checkout-info {
     height: 100%;
-    background-color: white;
+    background-color: #c3ad8c5b;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     border-radius: 5px;
 }
@@ -783,6 +812,49 @@ CHECKOUT
     font-weight: 600;
 
 }
+
+
+/* checkout extras */
+  
+
+.checkout-info {
+    font-family: 'Rubik', sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  .checkout-info-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .checkout-info-label {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .checkout-info-value {
+    font-size: 16px;
+  }
+  
+  .checkout-info-value::after {
+    content: '';
+    display: block;
+    height: 4px;
+    background-color: #f4f4f4;
+  }
+  
+  .checkout-info-total .checkout-info-value {
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  
+
+
 
 /****************** 
 ADD BUTTON
@@ -851,7 +923,10 @@ ADD BUTTON
 
    }
 
-
+   .right-align p {
+    text-align: right;
+    margin-bottom: 0;
+  }
 
    /* //////////////////////////////////////////// */
 
@@ -877,14 +952,17 @@ ADD BUTTON
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     border-radius: 5px;
     display: grid;
-    grid-template-rows: 13% 20% 67%;
+    grid-template-rows: 13% 30% 57%;
     background-color: #c3ad8c5b;
 
 }
 
 .profile-info-stats {
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    padding-top: 10px;
+    /* grid-template-rows: 1fr 1fr 1fr 1fr; */
+    grid-template-rows: 22.5% 25% 15% 10%;
+
 }
 
 .profile-info-startnew {
@@ -903,6 +981,7 @@ ADD BUTTON
   
   .profile-order { 
     width: 100%;
+    
     margin-bottom: 20px;
     height: 120px;
     display: flex;
@@ -957,6 +1036,12 @@ ADD BUTTON
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+  }
+
+  .profile-order-info strong {
+    font-size: 14px;
   }
 
   .profile-order-info div {
@@ -991,5 +1076,204 @@ ADD BUTTON
 }
 
 
+
+
+/* ///////////////////////////////// */
+/* Generative CSS */
+/* ///////////////////////////////// */
+
+/* for login page */
+
+
+.menu-heading {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    /* font-family: 'Oswald', sans-serif; */
+  }
+  
+  
+  .login-form {
+    background-color: #fff;
+    padding: 2em;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 90%;
+    margin: 0 auto;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+  }
+  
+  form {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-control {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;/* Updated value */
+    font-size: 0.9em;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Oswald', sans-serif;
+  }
+  
+  .btn-success:hover {
+    background-color: #218838;
+  }
+  
+  .form-text {
+    /* color: #dc3545; */
+    margin-top: -10px;
+    margin-bottom: 10px;
+    font-family: 'Rubik', sans-serif;
+    font-size: 1.2rem;
+  }
+
+
+  .form-label {
+    font-family: 'Rubik', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .form-control {
+    font-family: 'Rubik', sans-serif;
+    font-size: 14px;
+    padding: 5px;
+  }
+
+  .form-text.text-danger {
+    font-family: 'Rubik', sans-serif;
+    font-size: 12px;
+    color: red;
+  }
+
+
+  /* for flashes */
+
+  .alert {
+    text-align: center; /* Center the text */
+    color: #000000; /* Text color */
+    background-color: #c3ad8c5b; /* Background color */
+    border-color: #9d8b725b; /* Border color */
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+  
+    /* Add some animation to draw attention */
+    animation: flashMessage 2s ease-out;
+  }
+  
+  @keyframes flashMessage {
+    0%   {opacity: 0;}
+    20%  {opacity: 1;}
+    100% {opacity: 1;}
+  }
+  
+  /* for profile info container */
+
+  .profile-info-container {
+    max-width: 600px;
+    margin: auto;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.profile-orders-title {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.profile-info-stats {
+    color: #666;
+    line-height: 1.6;
+    font-family: 'Rubik', sans-serif;
+    /* border: #917e63 2px solid; */
+    border-radius: 10px;
+    background-color: #f3e9e1;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    /* margin-top: 10px; */
+    /* margin-bottom: 10px; */
+    /* padding-bottom: 20px; */
+}
+
+.profile-info-stats p {
+    margin: 0 0 10px;
+    font-size: 16px;
+}
+
+.profile-info-stats strong p {
+    color: #333;
+    font-size: 24px;
+}
+
+.profile-info-startnew {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 60px;
+}
+
+.profile-info-startnew button {
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #ffb375;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    color: white;
+    transition: 0.5s;
+
+    font-family: 'Rubik', sans-serif;
+}
+
+.profile-info-startnew button:hover {
+    background: linear-gradient(90deg, #feb47b 0%, #ff8e72 100%);
+    box-shadow: 0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+
+.profile-info-startnew button p {
+    margin: 0;
+}
+
+.profile-info-startnew button a {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+/* for about page */
+
+
+.top-margin {
+    margin-top: 30px;
+}
+.top-margin2 {
+    margin-top: 10px;
+}
+.closer-top {
+    margin-top: -30px;
+}
 
 

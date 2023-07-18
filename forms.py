@@ -21,8 +21,6 @@ class RegisterForm(FlaskForm):
     address_state = SelectField(
         "State", choices=STATE_LIST)
     address_zip = StringField("ZIP", validators=[InputRequired()])
-    # subscribed = BooleanField(
-    #     "Subscribe to Newsletter?", validators=[InputRequired()])
 
 
 class LoginForm(FlaskForm):

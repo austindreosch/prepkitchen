@@ -13,7 +13,7 @@
       {% for order_list in all_orders %}
       <div class="profile-order">
         <div class="profile-order-info">
-          <div>Order # {{order_list.0.order_id}}</div>
+          <div><strong>Order # {{order_list.0.order_id}}</strong></div>
           <div>{{ order_list.0.date.strftime('%Y-%m-%d %H:%M') }}</div>
         </div>
 
@@ -34,9 +34,9 @@
   <div class="profile-info-container">
     <p class="profile-orders-title">Your Info</p>
     <div class="profile-info-stats">
-      <strong><p>{{user.first_name}} {{user.last_name}}</p></strong>
+      <p class="form-label">{{user.first_name}} {{user.last_name}}</p>
       <p>{{user.email}}</p>
-      <p>Address</p>
+      <!-- <p>Address</p> -->
       <p>{{user.address_street}}</p>
       <p>{{user.address_city}}, {{user.address_state}} {{user.address_zip}}</p>
     </div>

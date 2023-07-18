@@ -15,29 +15,67 @@
       </div>
       {% endfor %}
     </div>
-    <div class="checkout-form">
-      <p>Billing Info</p>
+    <div class="login-form">
+      <p class="form-text">Billing Info</p>
       <form method="POST">
         {{ form.hidden_tag() }} {% for field in form if field.widget.input_type
         != 'hidden' %}
         <p>
-          {{ field.label }} {{ field(class_="form-control") }} {% for error in
-          field.errors %}
+          <label class="form-label">{{ field.label }}</label>
+          {{ field(class_="form-control") }} {% for error in field.errors %}
           <span class="form-text text-danger">{{ error }}</span>
           {% endfor %}
         </p>
         {% endfor %}
 
-        <button class="btn btn-success" type="submit">Submit Order</button>
+        <button class="btn btn-success form-text top-margin2" type="submit">
+          Submit Order
+        </button>
       </form>
     </div>
   </div>
   <div class="checkout-info">
-    <p>Plan: {{plan.serving_count}} servings. {{plan.meal_count}} meals.</p>
-    <p>Price: ${{plan.price}}</p>
-    <p>Shipping & handling: $0.00</p>
-    <p>Sales Tax: ${{tax}}</p>
-    <p>Total: ${{total}}</p>
+    <div class="form-label"><p>Summary</p></div>
+    <div class="checkout-info-item top-margin">
+      <p class="checkout-info-label">Name</p>
+      <div class="checkout-info-value">
+        <p>{{user.first_name}} {{user.last_name}}</p>
+      </div>
+    </div>
+    <div class="checkout-info-item top-margin right-align">
+      <p class="checkout-info-label">Address</p>
+      <div class="checkout-info-value">
+        <p>{{ user.address_street}}</p>
+        <p class="right-align">
+          {{ user.address_city }}, {{ user.address_state }} {{ user.address_zip
+          }}
+        </p>
+      </div>
+    </div>
+
+    <div class="top-margin"></div>
+    <div class="checkout-info-item top-margin">
+      <p class="checkout-info-label">Plan</p>
+      <div class="checkout-info-value">
+        {{ plan.serving_count }} servings. {{ plan.meal_count }} meals.
+      </div>
+    </div>
+    <div class="checkout-info-item">
+      <p class="checkout-info-label">Price</p>
+      <div class="checkout-info-value">$ {{ plan.price }}</div>
+    </div>
+    <div class="checkout-info-item">
+      <p class="checkout-info-label">Shipping &amp; Handling</p>
+      <div class="checkout-info-value">$ 0.00</div>
+    </div>
+    <div class="checkout-info-item">
+      <p class="checkout-info-label">Sales Tax</p>
+      <div class="checkout-info-value">$ {{ tax }}</div>
+    </div>
+    <div class="checkout-info-item checkout-info-total">
+      <p class="checkout-info-label">Total</p>
+      <div class="checkout-info-value">$ {{ total }}</div>
+    </div>
   </div>
 </section>
 <!--  -->
