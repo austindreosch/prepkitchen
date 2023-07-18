@@ -178,13 +178,13 @@ def cart_clear():
     return redirect(request.referrer)
 
 
-@ app.route("/checkout", methods=["GET", "POST"])
+@app.route("/checkout", methods=["GET", "POST"])
 def checkout():
     """Deal with checkout, and database saving."""
     if 'user_id' not in session:
         flash('Please log in first.')
         return redirect('/login')
-    
+
     username = session['user_id']
     user = User.query.filter_by(username=username).first()
     plan = Plan.query.filter_by(id=session['cart_plan_id']).first()
@@ -213,11 +213,12 @@ def checkout():
         item = item_data['meals']
         response_cart.append(
             {
-                "idMeal": eval(item[0]["idMeal"]),
+                "idMeal": item[0]["idMeal"],
                 "strMeal": item[0]["strMeal"].title(),
                 "strMealThumb": item[0]["strMealThumb"]
             }
         )
+
 
     if form.validate_on_submit():
         billing_name = form.billing_name.data
@@ -231,26 +232,37 @@ def checkout():
         meal_id1 = id_cart[0]
         meal_id2 = id_cart[1]
         meal_id3 = id_cart[2]
+        meal_id4 = id_cart[3] if len(id_cart) >= 4 else None
+        meal_id5 = id_cart[4] if len(id_cart) >= 5 else None
 
-        if len(id_cart) > 3:
-            meal_id4 = id_cart[3]
+        if len(id_cart) >= 3:
             order = Order(user_id=user.id,
                           plan_id=plan.id,
                           billing_name=billing_name,
                           billing_card=billing_card,
                           billing_code=billing_code,
-                          billing_street=billing_street, billing_city=billing_city, billing_state=billing_state, billing_zip=billing_zip, price=plan.price, tax=tax, total=total, meal_id1=meal_id1, meal_id2=meal_id2, meal_id3=meal_id3, meal_id4=meal_id4)
-            db.session.add(order)
+                          billing_street=billing_street,
+                          billing_city=billing_city,
+                          billing_state=billing_state,
+                          billing_zip=billing_zip,
+                          price=plan.price,
+                          tax=tax,
+                          total=total,
+                          meal_id1=meal_id1,
+                          meal_id2=meal_id2,
+                          meal_id3=meal_id3,
+                          meal_id4=meal_id4,
+                          meal_id5=meal_id5)
+        else:
+            flash('An error occurred while processing your order. Please try again.', 'danger')
+            return redirect('/checkout')
 
-        if len(id_cart) > 4:
-            meal_id5 = id_cart[4]
-            order.meal_id5 = meal_id5
-
+        db.session.add(order)
         db.session.commit()
 
         return redirect("/profile")
 
-    return render_template('checkout.html', user=user,plan=plan, tax=tax, total=total, form=form, session_cart=session_cart, response_cart=response_cart)
+    return render_template('checkout.html', user=user, plan=plan, tax=tax, total=total, form=form, session_cart=session_cart, response_cart=response_cart)
 
 
 @ app.route("/recipe/<int:meal_id>")
