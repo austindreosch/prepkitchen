@@ -109,7 +109,6 @@ def menu_choose(category_str):
         session_cart = session.get('cart_array', [])
         id_cart = session_cart
 
-
         cart_length = len(id_cart)
         session['cart_length'] = cart_length
 
