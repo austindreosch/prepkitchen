@@ -1,3 +1,4 @@
+import json
 from flask import Flask, render_template, session, request, redirect, flash
 import requests
 from models import connect_db, db, User, Plan, Order
@@ -103,7 +104,8 @@ def menu_choose(category_str):
     if 'cart_array' in session:
         # Retrieve the session cart as a list of ids
         session_cart = session.get('cart_array', [])
-        id_cart = [item_id for item_id in session_cart]
+        id_cart = session_cart
+
 
         cart_length = len(id_cart)
         session['cart_length'] = cart_length
