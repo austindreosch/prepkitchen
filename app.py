@@ -96,6 +96,8 @@ def menu_choose(category_str):
     session_cart = []
     response_cart = []
     session['cart_length'] = 0
+    
+    local_cart = json.loads(localStorage.getItem('cart_array'))
 
     # SHOPPING CART API CALLS
     if 'cart_array' in session:
@@ -154,7 +156,7 @@ def menu_choose(category_str):
     # DATABASE PULLS
     plan = Plan.query.filter_by(id=session_plan_id).first()
 
-    return render_template('menu-choose.html', selected_meals=selected_meals, heading=heading, session_cart=session_cart, response_cart=response_cart, session_plan_id=session_plan_id, session_meal_cap=session_meal_cap, plan=plan)
+    return render_template('menu-choose.html', selected_meals=selected_meals, heading=heading, session_cart=session_cart, response_cart=response_cart, session_plan_id=session_plan_id, session_meal_cap=session_meal_cap, plan=plan, local_cart=local_cart)
 
 
 @ app.route("/cart", methods=["POST"])
