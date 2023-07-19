@@ -102,9 +102,8 @@ def menu_choose(category_str):
     # SHOPPING CART API CALLS
     if 'cart_array' in session:
         # turn session string into a list of ids
-        session_cart = session['cart_array'].lstrip(
-            '["').rstrip('"]').split('","')
-        id_cart = [eval(i) for i in session_cart]
+        session_cart = session.get('cart_array', [])
+        id_cart = [eval(item_id) for item_id in session_cart]
 
         cart_length = len(id_cart)
         session['cart_length'] = cart_length
