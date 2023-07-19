@@ -59,13 +59,12 @@ def choose_plan(plan_id):
 
     if 'cart_array' in session:
         # turn session string into a list of ids
-        session_cart = session['cart_array'].lstrip(
-            '["').rstrip('"]').split('","')
+        session_cart = session.get('cart_array', [])
         id_cart = [eval(i) for i in session_cart]
         cart_length = len(id_cart)
         # reset cart if too many items for new plan
         if plan.meal_count < cart_length:
-            del session['cart_array']
+            session['cart_array'] = []
             session['cart_length'] = 0
 
     return redirect('/choose/pork')
