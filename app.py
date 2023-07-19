@@ -100,7 +100,7 @@ def menu_choose(category_str):
     
     # SHOPPING CART API CALLS
     if 'cart_array' in session:
-        session_cart = session.get('cart_array', [])
+        session_cart = json.loads(session.get('cart_array'))
         print("this is session cart:", session_cart)
         id_cart = [int(item) for item in session_cart]
         
