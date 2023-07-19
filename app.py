@@ -109,23 +109,18 @@ def menu_choose(category_str):
         session_cart = session.get('cart_array', [])
         id_cart = session_cart
 
-        cart_length = len(id_cart)
-        session['cart_length'] = cart_length
-
         for item_id in id_cart:
             item_url = f"https://www.themealdb.com/api/json/v1/1/lookup.php?i={item_id}"
-
             item_response = requests.get(item_url)
             if item_response.ok:
                 item_data = item_response.json()
-                item = item_data['meals']
-                if item:
+                if "meals" in item_data:
+                    item = item_data['meals']
                     response_cart.append({
                         "idMeal": item[0]["idMeal"],
                         "strMeal": item[0]["strMeal"].title(),
                         "strMealThumb": item[0]["strMealThumb"]
                     })
-                    print(response_cart)
                 else:
                     # Handle the case when the item is not found
                     response_cart.append({
