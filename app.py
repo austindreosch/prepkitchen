@@ -125,6 +125,7 @@ def menu_choose(category_str):
                         "strMeal": item[0]["strMeal"].title(),
                         "strMealThumb": item[0]["strMealThumb"]
                     })
+                    print(response_cart)
                 else:
                     # Handle the case when the item is not found
                     response_cart.append({

@@ -63,7 +63,7 @@ $(document).ready(function() {
             // location.reload();
             setTimeout(() => {
                 location.reload();
-                }, 10)
+                }, 1000)
         }
         
         // if (currentLocalStorage.includes(lastClickedID)){
