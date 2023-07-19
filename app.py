@@ -98,7 +98,10 @@ def menu_choose(category_str):
     response_cart = []
     session['cart_length'] = 0
     
-    local_cart = json.loads(localStorage.getItem('cart_array'))
+    local_cart = []
+    cart_array = request.form.getlist('cart_array')
+    if cart_array:
+        local_cart = [int(item_id) for item_id in cart_array]
 
     # SHOPPING CART API CALLS
     if 'cart_array' in session:
