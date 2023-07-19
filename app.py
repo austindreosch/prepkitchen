@@ -160,7 +160,7 @@ def shopping_cart():
     # pull the data sent from JS ajax post
     keys = request.form.keys()
     for key in keys:
-        cart_array = key
+        cart_array.append(key)
     # should be able to do this without loop, as this is all data - not just cart array
 
     session['cart_array'] = cart_array
