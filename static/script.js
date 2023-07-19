@@ -50,10 +50,13 @@ $(document).ready(function() {
                 url: serverBaseURL + appDir,
                 method: 'POST',
                 dataType: 'json',
-                data: localStorage.getItem("cart_array"),
+                data: { cart_array: localStorage.getItem("cart_array") },
                 success: function(response){
                     console.log(response);
-                    // use api data here, if needed
+                    // location.reload();
+                },
+                error: function(error) {
+                    console.log(error);
                 }   
             })
 
