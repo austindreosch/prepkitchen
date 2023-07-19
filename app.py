@@ -174,7 +174,7 @@ def shopping_cart():
     keys = request.form.keys()
     for key in keys:
         cart_array = key
-    session['cart_array'] = cart_array
+    session['cart_array'] = json.dumps(cart_array)
     # should be able to do this without loop, as this is all data - not just cart array
 
 
