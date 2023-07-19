@@ -122,7 +122,7 @@ def menu_choose(category_str):
                         "strMeal": item["strMeal"].title(),
                         "strMealThumb": item["strMealThumb"]
                     })
-                    print(response_cart)
+                    print("YO THIS IS THE RESPONSE CART", response_cart)
                 else:
                     # Handle the case when the item is not found
                     response_cart.append({
