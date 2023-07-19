@@ -104,18 +104,19 @@ def menu_choose(category_str):
         local_cart = [int(item_id) for item_id in cart_array]
 
     # SHOPPING CART API CALLS
-    if 'cart_array' in session:
-        # Retrieve the session cart as a list of ids
-        session_cart = session.get('cart_array', [])
+    if request.form.get('cart_array'):
+        session_cart = request.form.getlist('cart_array')
         id_cart = session_cart
 
         for item_id in id_cart:
             item_url = f"https://www.themealdb.com/api/json/v1/1/lookup.php?i={item_id}"
             item_response = requests.get(item_url)
+            
             if item_response.ok:
                 item_data = item_response.json()
-                if "meals" in item_data:
-                    item = item_data['meals'][0]
+                item_meals = item_data.get('meals')
+                if item_meals is not None and len(item_meals) > 0:
+                    item = item_meals[0]
                     response_cart.append({
                         "idMeal": item["idMeal"],
                         "strMeal": item["strMeal"].title(),
