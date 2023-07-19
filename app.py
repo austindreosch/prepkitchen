@@ -115,12 +115,13 @@ def menu_choose(category_str):
             if item_response.ok:
                 item_data = item_response.json()
                 if "meals" in item_data:
-                    item = item_data['meals']
+                    item = item_data['meals'][0]
                     response_cart.append({
-                        "idMeal": item[0]["idMeal"],
-                        "strMeal": item[0]["strMeal"].title(),
-                        "strMealThumb": item[0]["strMealThumb"]
+                        "idMeal": item["idMeal"],
+                        "strMeal": item["strMeal"].title(),
+                        "strMealThumb": item["strMealThumb"]
                     })
+                    print(response_cart)
                 else:
                     # Handle the case when the item is not found
                     response_cart.append({
@@ -144,6 +145,7 @@ def menu_choose(category_str):
         data = response.json()
         meals_json = data.get('meals', [])
         selected_meals = meals_json
+        print(len(selected_meals))
     else:
         # Handle the case when the API request fails
         selected_meals = []
