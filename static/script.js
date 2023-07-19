@@ -53,17 +53,17 @@ $(document).ready(function() {
                 data: { cart_array: localStorage.getItem("cart_array") },
                 success: function(response){
                     console.log(response);
-                    location.reload();
+                    // location.reload();
                 },
                 error: function(error) {
                     console.log(error);
                 }   
             })
 
-            // // location.reload();
-            // setTimeout(() => {
-            //     location.reload();
-            //     }, 5)
+            // location.reload();
+            setTimeout(() => {
+                location.reload();
+                }, 10)
         }
         
         // if (currentLocalStorage.includes(lastClickedID)){
