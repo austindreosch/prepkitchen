@@ -50,9 +50,10 @@ $(document).ready(function() {
                 url: serverBaseURL + appDir,
                 method: 'POST',
                 dataType: 'json',
-                data: { cart_array: localStorage.getItem("cart_array") },
+                data: localStorage.getItem("cart_array"),
                 success: function(response){
-                    console.log(response);
+                    console.log("cart_array");
+                    console.log(localStorage.getItem("cart_array"));
                     // location.reload();
                 },
                 error: function(error) {
