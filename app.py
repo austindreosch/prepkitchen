@@ -100,9 +100,13 @@ def menu_choose(category_str):
     
     # SHOPPING CART API CALLS
     if 'cart_array' in session:
-        session_cart = json.loads(session.get('cart_array'))
-        print("this is session cart:", session_cart)
-        id_cart = [int(item) for item in session_cart]
+        # turn session string into a list of ids
+        session_cart = session['cart_array'].lstrip(
+            '["').rstrip('"]').split('","')
+        id_cart = [eval(i) for i in session_cart]
+        
+        cart_length = len(id_cart)
+        session['cart_length'] = cart_length
         
 
         for item_id in id_cart:
@@ -163,13 +167,14 @@ def menu_choose(category_str):
 def shopping_cart():
     """API for shopping_cart saving. Data sent from JS."""
     
-    cart_array = request.form.getlist('cart_array')
-    session['cart_array'] = cart_array
+    # cart_array = request.form.getlist('cart_array')
+    # session['cart_array'] = cart_array
     
-    # cart_array = []
-    # keys = request.form.keys()
-    # for key in keys:
-    #     cart_array.append(key)
+    cart_array = []
+    keys = request.form.keys()
+    for key in keys:
+        cart_array = key
+    session['cart_array'] = cart_array
     # should be able to do this without loop, as this is all data - not just cart array
 
 
