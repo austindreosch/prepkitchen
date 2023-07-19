@@ -98,15 +98,18 @@ def menu_choose(category_str):
     response_cart = []
     session['cart_length'] = 0
     
-    local_cart = []
-    cart_array = request.form.getlist('cart_array')
-    if cart_array:
-        local_cart = [int(item_id) for item_id in cart_array]
-
     # SHOPPING CART API CALLS
-    if request.form.get('cart_array'):
-        session_cart = request.form.getlist('cart_array')
-        id_cart = session_cart
+    if 'cart_array' in session:
+        session_cart = session['cart_array'].lstrip(
+            '["').rstrip('"]').split('","')
+        print("this is session cart:", session_cart)
+        id_cart = []
+        for i in session_cart:
+            try:
+                id_cart.append(json.loads(i))
+            except json.JSONDecodeError:
+                print(f"Could not parse item: {i}")
+        
 
         for item_id in id_cart:
             item_url = f"https://www.themealdb.com/api/json/v1/1/lookup.php?i={item_id}"
@@ -146,7 +149,7 @@ def menu_choose(category_str):
         data = response.json()
         meals_json = data.get('meals', [])
         selected_meals = meals_json
-        print(len(selected_meals))
+        print("api meal count", len(selected_meals))
     else:
         # Handle the case when the API request fails
         selected_meals = []
@@ -159,7 +162,7 @@ def menu_choose(category_str):
     # DATABASE PULLS
     plan = Plan.query.filter_by(id=session_plan_id).first()
 
-    return render_template('menu-choose.html', selected_meals=selected_meals, heading=heading, session_cart=session_cart, response_cart=response_cart, session_plan_id=session_plan_id, session_meal_cap=session_meal_cap, plan=plan, local_cart=local_cart)
+    return render_template('menu-choose.html', selected_meals=selected_meals, heading=heading, session_cart=session_cart, response_cart=response_cart, session_plan_id=session_plan_id, session_meal_cap=session_meal_cap, plan=plan,)
 
 
 @ app.route("/cart", methods=["POST"])
