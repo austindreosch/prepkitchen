@@ -6,11 +6,11 @@ from forms import LoginForm, RegisterForm, CheckoutForm
 import math
 # from flask_debugtoolbar import DebugToolbarExtension
 from collections.abc import Mapping
+import os
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///prepkitchen'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = True
 app.config['SECRET_KEY'] = ("very_secret")
