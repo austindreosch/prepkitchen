@@ -3,7 +3,7 @@ from flask import Flask, render_template, session, request, redirect, flash
 import requests
 from models import connect_db, db, User, Plan, Order
 from forms import LoginForm, RegisterForm, CheckoutForm
-# from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import IntegrityError
 import math
 # from flask_debugtoolbar import DebugToolbarExtension
 from collections.abc import Mapping
