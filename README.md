@@ -1,5 +1,4 @@
-# prepkitchen
-# a Springboard capstone project.
+# prepkitchen, a Springboard capstone project.
 
 Welcome to my first capstone project — this application represents the culmination of my educational journey at the half-way point of Springboard's software engineering program. Here I have applied the concepts and techniques learned throughout the course, focusing on Python development and the suite of tools that we've learned alongside it.
 
