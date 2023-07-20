@@ -55,10 +55,7 @@ $(document).ready(function() {
                     console.log("cart_array");
                     console.log(localStorage.getItem("cart_array"));
                     // location.reload();
-                },
-                error: function(error) {
-                    console.log(error);
-                }   
+                }
             })
 
             // location.reload();
@@ -66,14 +63,6 @@ $(document).ready(function() {
                 location.reload();
                 }, 1000)
         }
-        
-        // if (currentLocalStorage.includes(lastClickedID)){
-        //     console.log(`${lastClickedID} already in cart!`)
-        // }
-        // else { // if clicked ID is not in localStorage
-        //     // 
-            
-        // }
     })
 
     // on click of clear cart button, clear localstorage variable

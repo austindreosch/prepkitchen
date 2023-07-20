@@ -89,80 +89,79 @@ def query(category_str):
     return render_template('menu.html', selected_meals=selected_meals, heading=heading, category_str=category_str)
 
 
+# CART MENU //////////////////////////////////////////
+# ///////////////////////////////////////////////////
+
 @ app.route('/choose/<category_str>')
 def menu_choose(category_str):
     """Choose menu, with buttons and shopping_cart."""
 
     heading = "Choose your meals."
     session_cart = []
+    id_cart = []
     response_cart = []
     session['cart_length'] = 0
-    
+
     # SHOPPING CART API CALLS
     if 'cart_array' in session:
         # turn session string into a list of ids
         session_cart = session['cart_array'].lstrip(
             '["').rstrip('"]').split('","')
         id_cart = [eval(i) for i in session_cart]
-        
+
         cart_length = len(id_cart)
         session['cart_length'] = cart_length
-        
 
-        for item_id in id_cart:
-            item_url = f"https://www.themealdb.com/api/json/v1/1/lookup.php?i={item_id}"
-            item_response = requests.get(item_url)
-            
-            if item_response.ok:
-                item_data = item_response.json()
-                item_meals = item_data.get('meals')
-                if item_meals is not None and len(item_meals) > 0:
-                    item = item_meals[0]
-                    response_cart.append({
-                        "idMeal": item["idMeal"],
-                        "strMeal": item["strMeal"].title(),
-                        "strMealThumb": item["strMealThumb"]
-                    })
-                    print("YO THIS IS THE RESPONSE CART", response_cart)
-                else:
-                    # Handle the case when the item is not found
-                    response_cart.append({
-                        "idMeal": item_id,
-                        "strMeal": "Meal not found",
-                        "strMealThumb": ""
-                    })
-            else:
-                # Handle the case when the API request fails
-                response_cart.append({
-                    "idMeal": item_id,
-                    "strMeal": "API request failed",
-                    "strMealThumb": ""
-                })
+    for item_id in id_cart:
+        item_url = f"https://www.themealdb.com/api/json/v1/1/lookup.php?i={item_id}"
+
+        item_response = requests.get(item_url)
+        item_data = item_response.json()
+        item = item_data['meals']
+        response_cart.append(
+            {
+                "idMeal": eval(item[0]["idMeal"]),
+                "strMeal": item[0]["strMeal"].title(),
+                "strMealThumb": item[0]["strMealThumb"]
+            }
+        )
+
+    print(response_cart)
 
     # MENU API CALLS
     menu_url = f"https://www.themealdb.com/api/json/v1/1/filter.php?c={category_str}"
     response = requests.get(menu_url)
 
-    if response.ok:
-        data = response.json()
-        meals_json = data.get('meals', [])
-        selected_meals = meals_json
-        print("api meal count", len(selected_meals))
-    else:
-        # Handle the case when the API request fails
-        selected_meals = []
+    data = response.json()
+    meals_json = data['meals']
+    selected_meals = []
+
+    for meal in range(len(meals_json)):
+        selected_meals.append(meals_json[meal])
 
     # SESSION DATA
-    session_plan_id = session.get('cart_plan_id', 1)
+    session_plan_id = 1
+    # set default plan
+    if 'cart_plan_id' in session:
+        session_plan_id = session['cart_plan_id']
 
-    session_meal_cap = session.get('meal_cap', 3)
+    session_meal_cap = 3
+    # set default cap
+    if 'meal _cap' in session:
+        session_meal_cap = session['meal _cap']
 
     # DATABASE PULLS
-    plan = Plan.query.filter_by(id=session_plan_id).first()
+    plan = Plan.query.filter_by(id=session['cart_plan_id']).first()
 
-    return render_template('menu-choose.html', selected_meals=selected_meals, heading=heading, session_cart=session_cart, response_cart=response_cart, session_plan_id=session_plan_id, session_meal_cap=session_meal_cap, plan=plan,)
+    return render_template('menu-choose.html', selected_meals=selected_meals, heading=heading, session_cart=session_cart, response_cart=response_cart, session_plan_id=session_plan_id, session_meal_cap=session_meal_cap, plan=plan)
 
 
+
+# CART MENU //////////////////////////////////////////
+# ///////////////////////////////////////////////////
+
+# CART  /////////////////////////////////////////////
+# ///////////////////////////////////////////////////
 @ app.route("/cart", methods=["POST"])
 def shopping_cart():
     """API for shopping_cart saving. Data sent from JS."""
@@ -174,12 +173,15 @@ def shopping_cart():
     keys = request.form.keys()
     for key in keys:
         cart_array = key
-    session['cart_array'] = json.dumps(cart_array)
+        
+    session['cart_array'] = cart_array
     # should be able to do this without loop, as this is all data - not just cart array
 
 
     return redirect(request.referrer)
 
+# CART  /////////////////////////////////////////////
+# ///////////////////////////////////////////////////
 
 @ app.route("/cart/clear")
 def cart_clear():
